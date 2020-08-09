@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PC_Building_Application.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,7 @@ namespace PC_Building_Application.Data
         {
             base.OnModelCreating(modelBuilder);
         }
+
+        public DbSet<User> Users { get; set; }
     }
 }
