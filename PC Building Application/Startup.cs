@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Serialization;
 using PC_Building_Application.Data;
+using PC_Building_Application.Data.Repositories;
+using PC_Building_Application.Data.Repositories.Interfaces;
 
 namespace PC_Building_Application
 {
@@ -41,6 +43,8 @@ namespace PC_Building_Application
             });
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddScoped<IUserRepo, UserRepo>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
