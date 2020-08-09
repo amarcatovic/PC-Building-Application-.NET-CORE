@@ -56,7 +56,8 @@ namespace PC_Building_Application.Controllers
             {
                 new Claim(ClaimTypes.NameIdentifier, userFromDb.Id),
                 new Claim(ClaimTypes.Name, userFromDb.UserName),
-                new Claim(ClaimTypes.Email, userFromDb.Email)
+                new Claim(ClaimTypes.Email, userFromDb.Email),
+                new Claim("Email Confirmed", userFromDb.EmailConfirmed.ToString())
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8
