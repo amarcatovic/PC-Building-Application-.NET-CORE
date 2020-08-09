@@ -14,9 +14,6 @@ namespace PC_Building_Application.Data.EntityConfigurations
         {
             builder.HasKey(u => u.Id);
 
-            builder.Property(u => u.Id)
-                .HasDefaultValueSql("NEWID()");
-
             builder.Property(u => u.UserName)
                 .IsRequired();
 

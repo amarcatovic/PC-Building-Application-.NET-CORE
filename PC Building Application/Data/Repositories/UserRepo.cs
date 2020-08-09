@@ -37,6 +37,7 @@ namespace PC_Building_Application.Data.Repositories
 
             newUser.PasswordHash = passwordHash;
             newUser.PasswordSalt = passwordSalt;
+            newUser.Id = Guid.NewGuid().ToString();
 
             await _context.Users.AddAsync(newUser);
             await _context.SaveChangesAsync();
