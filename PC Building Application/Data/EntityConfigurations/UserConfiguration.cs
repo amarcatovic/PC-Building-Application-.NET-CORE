@@ -17,6 +17,9 @@ namespace PC_Building_Application.Data.EntityConfigurations
             builder.Property(u => u.UserName)
                 .IsRequired();
 
+            builder.HasIndex(u => new { u.UserName, u.Email })
+                .IsUnique();
+
             builder.Property(u => u.PasswordHash)
                 .IsRequired();
 
