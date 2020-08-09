@@ -8,10 +8,7 @@ namespace PC_Building_Application.Data
 {
     public class DataContext : DbContext
     {
-        public DataContext()
-        {
-
-        }
+        public DataContext(DbContextOptions<DataContext> opt) : base(opt) {}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
