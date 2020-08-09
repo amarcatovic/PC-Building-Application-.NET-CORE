@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PC_Building_Application.Data.EntityConfigurations;
 using PC_Building_Application.Data.Models;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,8 @@ namespace PC_Building_Application.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+
             base.OnModelCreating(modelBuilder);
         }
 
