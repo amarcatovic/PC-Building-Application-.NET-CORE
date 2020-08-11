@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200811154332_FixMotherboardBug.cs" />
+    <Compile Remove="Migrations\20200811154332_FixMotherboardBug.Designer.cs" />
+    <Compile Remove="Migrations\20200811154634_FixMotherboardBug.cs" />
+    <Compile Remove="Migrations\20200811154634_FixMotherboardBug.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="3.1.6" />

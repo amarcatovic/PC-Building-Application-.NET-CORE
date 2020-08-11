@@ -12,13 +12,40 @@ namespace PC_Building_Application.Data.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Motherboard> builder)
         {
-            builder.HasKey(m => m.Id);
 
-            builder.Property(m => new { m.Name, m.Released, m.SocketTypeId, m.MaxMemmoryFreq, 
-                m.MemoryType, m.NoOfM2Slots, m.NoOfPCIeSlots, m.NoOfRAMSlots, m.HasRGB, m.ManufacturerId })
+            builder.Property(m => m.Name)
                 .IsRequired();
 
-            builder.HasKey(m => new { m.Name, m.Released });
+            builder.Property(m => m.Released)
+               .IsRequired();
+
+            builder.Property(m => m.SocketTypeId)
+               .IsRequired();
+
+            builder.Property(m => m.MaxMemmoryFreq)
+               .IsRequired();
+
+            builder.Property(m => m.MemoryType)
+               .IsRequired();
+
+            builder.Property(m => m.NoOfM2Slots)
+               .IsRequired();
+
+            builder.Property(m => m.NoOfPCIeSlots)
+               .IsRequired();
+
+            builder.Property(m => m.NoOfRAMSlots)
+               .IsRequired();
+
+            builder.Property(m => m.HasRGB)
+               .IsRequired();
+
+            builder.Property(m => m.ManufacturerId)
+               .IsRequired();
+
+            builder.HasIndex(m => new { m.Name, m.Released });
+
+            builder.HasKey(m => m.Id);
         }
     }
 }

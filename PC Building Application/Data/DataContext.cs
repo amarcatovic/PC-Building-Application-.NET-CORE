@@ -24,5 +24,9 @@ namespace PC_Building_Application.Data
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<SocketType> SocketTypes { get; set; }
+        public DbSet<Manufacturer> Manufacturers { get; set; }
+        public DbSet<Motherboard> Motherboards { get; set; }
+        public DbSet<CPU> CPUs { get; set; }
     }
 }

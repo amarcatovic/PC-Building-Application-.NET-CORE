@@ -11,9 +11,26 @@ namespace PC_Building_Application.Data.EntityConfigurations
         {
             builder.HasKey(cpu => cpu.Id);
 
-            builder.Property(cpu => new { cpu.Name, cpu.Released, cpu.SocketTypeId, cpu.Clockspeed, 
-                cpu.NoOfCores, cpu.SingleThreadRating, cpu.ManufacturerId})
+            builder.Property(cpu => cpu.Name)
                 .IsRequired();
+
+            builder.Property(cpu => cpu.Released)
+               .IsRequired();
+
+            builder.Property(cpu => cpu.SocketTypeId)
+               .IsRequired();
+
+            builder.Property(cpu => cpu.Clockspeed)
+               .IsRequired();
+
+            builder.Property(cpu => cpu.NoOfCores)
+               .IsRequired();
+
+            builder.Property(cpu => cpu.SingleThreadRating)
+               .IsRequired();
+
+            builder.Property(cpu => cpu.ManufacturerId)
+               .IsRequired();
 
             builder.HasIndex(cpu => cpu.Name);
         }
