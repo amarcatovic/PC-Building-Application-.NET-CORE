@@ -19,6 +19,7 @@ namespace PC_Building_Application.Data
             modelBuilder.ApplyConfiguration(new ManufacturerConfiguration());
             modelBuilder.ApplyConfiguration(new MotherboardConfiguration());
             modelBuilder.ApplyConfiguration(new CPUConfiguration());
+            modelBuilder.ApplyConfiguration(new PCConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
@@ -28,5 +29,6 @@ namespace PC_Building_Application.Data
         public DbSet<Manufacturer> Manufacturers { get; set; }
         public DbSet<Motherboard> Motherboards { get; set; }
         public DbSet<CPU> CPUs { get; set; }
+        public DbSet<PC> PCs { get; set; }
     }
 }

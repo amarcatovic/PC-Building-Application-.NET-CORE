@@ -10,6 +10,22 @@
     <Compile Remove="Migrations\20200811154332_FixMotherboardBug.Designer.cs" />
     <Compile Remove="Migrations\20200811154634_FixMotherboardBug.cs" />
     <Compile Remove="Migrations\20200811154634_FixMotherboardBug.Designer.cs" />
+    <Compile Remove="Migrations\20200811192222_AddPCEntity.cs" />
+    <Compile Remove="Migrations\20200811192222_AddPCEntity.Designer.cs" />
+    <Compile Remove="Migrations\20200811192455_AddPCEntity.cs" />
+    <Compile Remove="Migrations\20200811192455_AddPCEntity.Designer.cs" />
+    <Compile Remove="Migrations\20200811192710_AddPCEntity.cs" />
+    <Compile Remove="Migrations\20200811192710_AddPCEntity.Designer.cs" />
+    <Compile Remove="Migrations\20200811192756_AddPCEntity.cs" />
+    <Compile Remove="Migrations\20200811192756_AddPCEntity.Designer.cs" />
+    <Compile Remove="Migrations\20200811193010_AddPCEntity.cs" />
+    <Compile Remove="Migrations\20200811193010_AddPCEntity.Designer.cs" />
+    <Compile Remove="Migrations\20200811193427_AddPCEntity.cs" />
+    <Compile Remove="Migrations\20200811193427_AddPCEntity.Designer.cs" />
+    <Compile Remove="Migrations\20200811194057_AddPCEntity.cs" />
+    <Compile Remove="Migrations\20200811194057_AddPCEntity.Designer.cs" />
+    <Compile Remove="Migrations\20200811194140_AddPCEntity.cs" />
+    <Compile Remove="Migrations\20200811194140_AddPCEntity.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

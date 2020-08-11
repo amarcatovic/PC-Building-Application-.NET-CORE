@@ -20,5 +20,6 @@ namespace PC_Building_Application.Data.Models
         public int NoOfRAMSlots { get; set; }
         public Manufacturer Manufacturer { get; set; }
         public int ManufacturerId { get; set; }
+        public ICollection<PC> PCs { get; set; }
     }
 }
