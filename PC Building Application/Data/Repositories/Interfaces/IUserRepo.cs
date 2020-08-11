@@ -13,5 +13,8 @@ namespace PC_Building_Application.Data.Repositories.Interfaces
         Task<User> Register(User newUser, string password);
 
         Task<bool> UserExsists(string username);
+
+        Task<User> GetUserById(string id);
+        Task<IEnumerable<User>> GetUsers();
     }
 }

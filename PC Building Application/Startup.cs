@@ -79,6 +79,7 @@ namespace PC_Building_Application
             app.UseRouting();
 
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

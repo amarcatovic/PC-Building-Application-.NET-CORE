@@ -17,6 +17,9 @@ namespace PC_Building_Application.Profiles
 
             CreateMap<User, UserLoginDto>();
             CreateMap<UserLoginDto, User>();
+
+            CreateMap<User, UserReadDto>();
+            CreateMap<UserReadDto, User>();
         }
     }
 }

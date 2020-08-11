@@ -26,8 +26,7 @@ namespace PC_Building_Application.Data.Repositories
             if (!CheckPasswordValidity(password, userFromDb.PasswordHash, userFromDb.PasswordSalt))
                 return null;
 
-            return userFromDb;
-            
+            return userFromDb;          
         }
         public async Task<User> Register(User newUser, string password)
         {
@@ -75,6 +74,16 @@ namespace PC_Building_Application.Data.Repositories
                 return false;
 
             return true;
+        }
+
+        public async Task<User> GetUserById(string id)
+        {
+            return await _context.Users.SingleOrDefaultAsync(u => u.Id == id);
+        }
+
+        public async Task<IEnumerable<User>> GetUsers()
+        {
+            return await _context.Users.ToListAsync();
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +17,7 @@ using PC_Building_Application.Data.Repositories.Interfaces;
 
 namespace PC_Building_Application.Controllers
 {
+    [Authorize]
     [Route("api/Users")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -31,6 +33,29 @@ namespace PC_Building_Application.Controllers
             _config = config;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            var users = await _repo.GetUsers();
+
+            var mappedUsers = _mapper.Map<IEnumerable<UserReadDto>>(users);
+
+            return Ok(mappedUsers);
+        }
+
+        [HttpGet("{id}", Name = "GetUserById")]
+        public async Task<IActionResult> GetUserById(string id)
+        {
+            var user = await _repo.GetUserById(id);
+            if (user == null)
+                return NotFound($"User with id {id} is not found!");
+
+            var mappedUser = _mapper.Map<UserReadDto>(user);
+
+            return Ok(mappedUser);
+        }
+
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> RegisterNewUser(UserRegisterDto newUser)
         {
@@ -44,6 +69,7 @@ namespace PC_Building_Application.Controllers
             return StatusCode(201);
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserLoginDto user)
         {
