@@ -15,6 +15,10 @@ namespace PC_Building_Application.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new SocketTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ManufacturerConfiguration());
+            modelBuilder.ApplyConfiguration(new MotherboardConfiguration());
+            modelBuilder.ApplyConfiguration(new CPUConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
