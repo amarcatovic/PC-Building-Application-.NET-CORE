@@ -31,6 +31,9 @@ namespace PC_Building_Application.Data.EntityConfigurations
 
             builder.Property(u => u.EmailConfirmed)
                 .HasDefaultValue(false);
+
+            builder.Property(u => u.PhotoId)
+                .HasDefaultValue(1);
         }
     }
 }

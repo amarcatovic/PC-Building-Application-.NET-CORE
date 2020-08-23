@@ -20,6 +20,7 @@ namespace PC_Building_Application.Data
             modelBuilder.ApplyConfiguration(new MotherboardConfiguration());
             modelBuilder.ApplyConfiguration(new CPUConfiguration());
             modelBuilder.ApplyConfiguration(new PCConfiguration());
+            modelBuilder.ApplyConfiguration(new PhotoConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
@@ -30,5 +31,6 @@ namespace PC_Building_Application.Data
         public DbSet<Motherboard> Motherboards { get; set; }
         public DbSet<CPU> CPUs { get; set; }
         public DbSet<PC> PCs { get; set; }
+        public DbSet<Photo> Photos { get; set; }
     }
 }

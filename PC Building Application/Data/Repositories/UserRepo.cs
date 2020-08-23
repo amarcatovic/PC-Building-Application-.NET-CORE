@@ -39,7 +39,6 @@ namespace PC_Building_Application.Data.Repositories
             newUser.Id = Guid.NewGuid().ToString();
 
             await _context.Users.AddAsync(newUser);
-            await _context.SaveChangesAsync();
 
             return newUser;
         }
@@ -84,6 +83,11 @@ namespace PC_Building_Application.Data.Repositories
         public async Task<IEnumerable<User>> GetUsers()
         {
             return await _context.Users.ToListAsync();
+        }
+
+        public async Task<int> Done()
+        {
+            return await _context.SaveChangesAsync();
         }
     }
 }

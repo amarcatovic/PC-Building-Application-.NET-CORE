@@ -66,7 +66,13 @@ namespace PC_Building_Application.Controllers
 
             var createdUser = _repo.Register(newUserMapped, newUser.Password);
 
-            return StatusCode(201);
+            if(await _repo.Done() > 0)
+            {
+                return CreatedAtRoute(nameof(GetUserById), new { id = createdUser.Id }, createdUser);
+            }
+
+            return BadRequest("Something went bad!");
+
         }
 
         [AllowAnonymous]

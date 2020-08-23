@@ -16,5 +16,6 @@ namespace PC_Building_Application.Data.Repositories.Interfaces
 
         Task<User> GetUserById(string id);
         Task<IEnumerable<User>> GetUsers();
+        Task<int> Done();
     }
 }

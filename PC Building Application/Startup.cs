@@ -17,6 +17,7 @@ using Newtonsoft.Json.Serialization;
 using PC_Building_Application.Data;
 using PC_Building_Application.Data.Repositories;
 using PC_Building_Application.Data.Repositories.Interfaces;
+using PC_Building_Application.Helper;
 
 namespace PC_Building_Application
 {
@@ -48,6 +49,7 @@ namespace PC_Building_Application
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IUserRepo, UserRepo>();
+            services.AddScoped<IPhotoRepo, PhotoRepo>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(opt =>
@@ -60,6 +62,8 @@ namespace PC_Building_Application
                         ValidateAudience = false
                     };
                 });
+
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
