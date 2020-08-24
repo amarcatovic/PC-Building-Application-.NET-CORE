@@ -18,8 +18,11 @@ namespace PC_Building_Application.Profiles
             CreateMap<User, UserLoginDto>();
             CreateMap<UserLoginDto, User>();
 
-            CreateMap<User, UserReadDto>();
+            CreateMap<User, UserReadDto>()
+                .ForMember(dest => dest.PhotoUrl, 
+                opt => opt.MapFrom(src => src.Photo.Url));
             CreateMap<UserReadDto, User>();
+                
         }
     }
 }

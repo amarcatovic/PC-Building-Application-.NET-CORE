@@ -77,12 +77,12 @@ namespace PC_Building_Application.Data.Repositories
 
         public async Task<User> GetUserById(string id)
         {
-            return await _context.Users.SingleOrDefaultAsync(u => u.Id == id);
+            return await _context.Users.Include(u => u.Photo).SingleOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<IEnumerable<User>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users.Include(u => u.Photo).ToListAsync();
         }
 
         public async Task<int> Done()
