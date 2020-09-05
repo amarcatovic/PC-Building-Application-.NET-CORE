@@ -9,7 +9,7 @@ namespace PC_Building_Application.Data.Repositories.Interfaces
 {
     public interface IMotherboardRepo
     {
-        Task<Motherboard> GetAllMotherboards();
+        Task<IEnumerable<Motherboard>> GetAllMotherboards();
         Task<Motherboard> GetMotherboardById(int id);
         Task<Motherboard> CreateMotherboard(Motherboard mobo, PhotoToCreateDto photo);
     }
