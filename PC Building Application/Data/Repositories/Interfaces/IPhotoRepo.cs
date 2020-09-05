@@ -11,7 +11,7 @@ namespace PC_Building_Application.Data.Repositories.Interfaces
     {
         Task AddPhoto(Photo photo);
         Task<Photo> GetPhoto(int id);
-        Task<Photo> AddPhotoForComponent(int componentId, PhotoToCreateDto photo);
+        Task<Photo> AddPhotoForComponent(PhotoToCreateDto photo);
         Task<int> Done();
     }
 }
