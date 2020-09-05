@@ -16,6 +16,7 @@ namespace PC_Building_Application.Profiles
                 .ForMember(dest => dest.Manufacturer, opt => opt.MapFrom(src => src.Manufacturer.Name))
                 .ForMember(dest => dest.SocketType, opt => opt.MapFrom(src => src.SocketType.Name));
             CreateMap<MotherboardCreateDto, Motherboard>();
+            CreateMap<Motherboard, MotherboardCreateDto>();
         }
     }
 }
