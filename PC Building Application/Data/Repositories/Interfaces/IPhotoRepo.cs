@@ -10,6 +10,7 @@ namespace PC_Building_Application.Data.Repositories.Interfaces
     {
         Task AddPhoto(Photo photo);
         Task<Photo> GetPhoto(int id);
+        Task<Photo> AddPhotoForComponent(int componentId);
         Task<int> Done();
     }
 }
