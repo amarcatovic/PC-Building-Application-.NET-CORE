@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using PC_Building_Application.Data.Models;
 using PC_Building_Application.Data.Models.Dtos;
@@ -61,6 +62,25 @@ namespace PC_Building_Application.Controllers
             }
 
             return BadRequest("Something went wrong. Review data and try again");
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> PatchMotherboard(int id, JsonPatchDocument<MotherboardCreateDto> patchDocument)
+        {
+            var moboFromDb = await _repo.GetMotherboardById(id);
+            if (moboFromDb == null)
+                return NotFound($"Motherboard with id {id} was not found");
+
+            var motherboardPatch = _mapper.Map<MotherboardCreateDto>(moboFromDb);
+            patchDocument.ApplyTo(motherboardPatch, ModelState);
+
+            if (!TryValidateModel(motherboardPatch))
+                return ValidationProblem(ModelState);
+
+            _mapper.Map(motherboardPatch, moboFromDb);
+            await _repo.Done();
+
+            return NoContent();
         }
     }
 }
