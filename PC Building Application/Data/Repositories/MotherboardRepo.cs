@@ -12,9 +12,9 @@ namespace PC_Building_Application.Data.Repositories
     public class MotherboardRepo : IMotherboardRepo
     {
         private readonly DataContext _context;
-        private readonly PhotoRepo _photoRepo;
+        private readonly IPhotoRepo _photoRepo;
 
-        public MotherboardRepo(DataContext context, PhotoRepo photoRepo)
+        public MotherboardRepo(DataContext context, IPhotoRepo photoRepo)
         {
             _context = context;
             _photoRepo = photoRepo;
