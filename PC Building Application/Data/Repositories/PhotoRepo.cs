@@ -40,7 +40,7 @@ namespace PC_Building_Application.Data.Repositories
             await _context.AddAsync(photo);
         }
 
-        public async Task<Photo> AddPhotoForComponent(int componentId, PhotoToCreateDto photo)
+        public async Task<Photo> AddPhotoForComponent(PhotoToCreateDto photo)
         {
             var file = photo.File;
             var uploadResult = new ImageUploadResult();
