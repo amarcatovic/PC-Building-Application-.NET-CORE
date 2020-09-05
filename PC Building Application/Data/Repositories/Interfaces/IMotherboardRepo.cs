@@ -11,6 +11,7 @@ namespace PC_Building_Application.Data.Repositories.Interfaces
     {
         Task<IEnumerable<Motherboard>> GetAllMotherboards();
         Task<Motherboard> GetMotherboardById(int id);
-        Task<Motherboard> CreateMotherboard(Motherboard mobo, PhotoToCreateDto photo);
+        Task CreateMotherboard(Motherboard mobo, PhotoToCreateDto photo);
+        Task<int> Done();
     }
 }
