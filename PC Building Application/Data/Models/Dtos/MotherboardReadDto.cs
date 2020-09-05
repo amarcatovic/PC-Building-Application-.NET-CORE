@@ -10,14 +10,14 @@ namespace PC_Building_Application.Data.Models.Dtos
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime Released { get; set; }
-        public SocketType SocketType { get; set; }
+        public string SocketType { get; set; }
         public int MaxMemmoryFreq { get; set; }
         public string MemoryType { get; set; }
         public int NoOfM2Slots { get; set; }
         public bool HasRGB { get; set; }
         public int NoOfPCIeSlots { get; set; }
         public int NoOfRAMSlots { get; set; }
-        public Manufacturer Manufacturer { get; set; }
+        public string Manufacturer { get; set; }
         public PhotoReturnDto Photo { get; set; }
     }
 }
