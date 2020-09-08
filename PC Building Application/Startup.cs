@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +18,7 @@ using PC_Building_Application.Data;
 using PC_Building_Application.Data.Repositories;
 using PC_Building_Application.Data.Repositories.Interfaces;
 using PC_Building_Application.Helper;
+using Microsoft.OpenApi.Models;
 
 namespace PC_Building_Application
 {
@@ -66,7 +67,22 @@ namespace PC_Building_Application
 
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
 
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "PC Building Application",
+                    Description = "Application that helps you build PCs",
+                    TermsOfService = new Uri("https://example.com/terms"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Amar Ćatović",
+                        Email = "amar_catovic@hotmail.com",
+                        Url = new Uri("https://www.facebook.com/amar.catovic.39/"),
+                    }
+                });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
