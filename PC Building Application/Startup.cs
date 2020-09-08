@@ -65,6 +65,8 @@ namespace PC_Building_Application
                 });
 
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
+
+            services.AddSwaggerGen();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -78,6 +80,8 @@ namespace PC_Building_Application
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
+            app.UseSwagger();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -91,6 +95,11 @@ namespace PC_Building_Application
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "PC Builder API");
             });
         }
     }
