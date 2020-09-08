@@ -19,6 +19,8 @@ using PC_Building_Application.Data.Repositories;
 using PC_Building_Application.Data.Repositories.Interfaces;
 using PC_Building_Application.Helper;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
+using System.IO;
 
 namespace PC_Building_Application
 {
@@ -82,6 +84,9 @@ namespace PC_Building_Application
                         Url = new Uri("https://www.facebook.com/amar.catovic.39/"),
                     }
                 });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
         }
 
