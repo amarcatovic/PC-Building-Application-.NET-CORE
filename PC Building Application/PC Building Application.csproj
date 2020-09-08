@@ -5,6 +5,11 @@
     <RootNamespace>PC_Building_Application</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Migrations\20200811154332_FixMotherboardBug.cs" />
     <Compile Remove="Migrations\20200811154332_FixMotherboardBug.Designer.cs" />
