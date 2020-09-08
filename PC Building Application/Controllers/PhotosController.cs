@@ -44,6 +44,18 @@ namespace PC_Building_Application.Controllers
             _cloudinary = new Cloudinary(account);
         }
 
+        /// <summary>
+        /// Returns single photo which id matches with requested id
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     GET /api/photos/1
+        ///     Header: Authorisation: Barer JWT
+        ///
+        /// </remarks>
+        /// <response code="200">Returns photo info if okay</response>
+        /// <response code="404">If something goes wrong</response>  
         [HttpGet("{id}", Name = "GetPhoto")]
         public async Task<IActionResult> GetPhoto(int id)
         {
@@ -57,6 +69,19 @@ namespace PC_Building_Application.Controllers
             return Ok(photoReturnDto);
         }
 
+        /// <summary>
+        /// Returns single photo which id matches with requested id
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /api/photos/add/user/1
+        ///     Header: Authorisation: Barer JWT
+        ///     Information from form is required
+        ///
+        /// </remarks>
+        /// <response code="201">Returns photo info if okay</response>
+        /// <response code="400">If something goes wrong</response>  
         [HttpPost("add/user/{id}")]
         public async Task<IActionResult> AddPhoto(string id, [FromForm] PhotoToCreateDto photoToCreateDto)
         {
