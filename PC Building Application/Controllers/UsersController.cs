@@ -33,6 +33,18 @@ namespace PC_Building_Application.Controllers
             _config = config;
         }
 
+        /// <summary>
+        /// Returns all users info
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     GET /api/users
+        ///     Header: Authorisation: Barer JWT
+        ///
+        /// </remarks>
+        /// <response code="200">Returns user info if okay</response>
+        /// <response code="404">If something goes wrong</response>  
         [HttpGet]
         public async Task<IActionResult> GetAllUsers()
         {
@@ -43,6 +55,18 @@ namespace PC_Building_Application.Controllers
             return Ok(mappedUsers);
         }
 
+        /// <summary>
+        /// Returns single user which id matches with requested id
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     GET /api/users/1
+        ///     Header: Authorisation: Barer JWT
+        ///
+        /// </remarks>
+        /// <response code="200">Returns user info if okay</response>
+        /// <response code="404">If something goes wrong</response>  
         [HttpGet("{id}", Name = "GetUserById")]
         public async Task<IActionResult> GetUserById(string id)
         {
@@ -55,6 +79,22 @@ namespace PC_Building_Application.Controllers
             return Ok(mappedUser);
         }
 
+        /// <summary>
+        /// User provides username, email and password for registration
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /api/users/register
+        ///     {
+        ///        "username": "user",
+        ///        "email": "example@email.com",
+        ///        "password": "pa$$word"     
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="201">Returns user info if okay</response>
+        /// <response code="400">If something goes wrong</response>  
         [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> RegisterNewUser(UserRegisterDto newUser)
@@ -75,6 +115,21 @@ namespace PC_Building_Application.Controllers
 
         }
 
+        /// <summary>
+        /// User provides username and password for login
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /api/users/login
+        ///     {
+        ///        "username": "user",
+        ///        "password": "pa$$word"     
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="200">Returns JWT if login okay</response>
+        /// <response code="401">If something goes wrong</response>  
         [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserLoginDto user)
