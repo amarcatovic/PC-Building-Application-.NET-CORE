@@ -15,6 +15,8 @@ namespace PC_Building_Application.Data.Models
         public string CapacityPerStick { get; set; }
         public bool HasRGB { get; set; }
         public float Price { get; set; }
+        public Photo Photo { get; set; }
+        public int PhotoId { get; set; }
         public ICollection<PC> PCs { get; set; }
     }
 }
