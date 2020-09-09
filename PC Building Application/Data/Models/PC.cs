@@ -22,6 +22,8 @@ namespace PC_Building_Application.Data.Models
         public int GPUId { get; set; }
         public Cooler Cooler { get; set; }
         public int CoolerId { get; set; }
+        public PowerSupply PowerSupply { get; set; }
+        public int PowerSupplyId { get; set; }
         public ICollection<PCRAM> PCRAMs { get; set; }
     }
 }
