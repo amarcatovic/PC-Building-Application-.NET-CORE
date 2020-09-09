@@ -9,6 +9,6 @@ namespace PC_Building_Application.Data.Models.Dtos.Socket_Type_Dtos
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<Motherboard> Motherboards { get; set; }
+        public ICollection<MotherboardReadDto> Motherboards { get; set; }
     }
 }
