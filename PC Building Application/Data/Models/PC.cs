@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PC_Building_Application.Data.Models.Join_Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,6 +18,6 @@ namespace PC_Building_Application.Data.Models
         public int CPUId { get; set; }
         public User User { get; set; }
         public string UserId { get; set; }
-        public ICollection<RAM> RAMs { get; set; }
+        public ICollection<PCRAM> PCRAMs { get; set; }
     }
 }
