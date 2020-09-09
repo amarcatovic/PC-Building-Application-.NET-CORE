@@ -14,6 +14,7 @@ namespace PC_Building_Application.Data.Models.Dtos.CPU_Dtos
         public string Clockspeed { get; set; }
         public string TurboSpeed { get; set; }
         public int NoOfCores { get; set; }
+        public float Price { get; set; }
         public int SingleThreadRating { get; set; }
         public string Manufacturer { get; set; }
         public PhotoReturnDto Photo { get; set; }
