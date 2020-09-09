@@ -17,6 +17,7 @@ namespace PC_Building_Application.Data.Models.Dtos.RAM_Dtos
         public bool HasRGB { get; set; }
         public float Price { get; set; }
         public int PhotoId { get; set; }
+        public int ManufacturerId { get; set; }
         public string PhotoDescription { get; set; }
         public IFormFile PhotoFile { get; set; }
     }
