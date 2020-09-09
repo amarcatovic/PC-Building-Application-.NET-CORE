@@ -16,6 +16,7 @@ namespace PC_Building_Application.Data.Models
         public string TurboSpeed { get; set; }
         public int NoOfCores { get; set; }
         public int SingleThreadRating { get; set; }
+        public float Price { get; set; }
         public Manufacturer Manufacturer { get; set; }
         public int ManufacturerId { get; set; }
         public Photo Photo { get; set; }
