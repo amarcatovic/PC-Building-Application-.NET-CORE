@@ -38,8 +38,6 @@ namespace PC_Building_Application.Helper
                             PublicId = "0"
                         }                               
                 );
-
-                context.SaveChanges();
             }
             else
             {
@@ -87,6 +85,8 @@ namespace PC_Building_Application.Helper
             {
                 Console.WriteLine("There are some Manufacturers in the database!");
             }
+
+            context.SaveChanges();
         }
     }
 }
