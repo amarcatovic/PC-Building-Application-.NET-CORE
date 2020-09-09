@@ -24,6 +24,9 @@ namespace PC_Building_Application.Data
             modelBuilder.ApplyConfiguration(new PhotoConfiguration());
             modelBuilder.ApplyConfiguration(new RAMConfiguration());
             modelBuilder.ApplyConfiguration(new PCRAMConfiguration());
+            modelBuilder.ApplyConfiguration(new GPUConfiguration());
+            modelBuilder.ApplyConfiguration(new CoolerConfiguration());
+            modelBuilder.ApplyConfiguration(new CoolerSocketTypeConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
@@ -37,5 +40,8 @@ namespace PC_Building_Application.Data
         public DbSet<Photo> Photos { get; set; }
         public DbSet<RAM> RAMs { get; set; }
         public DbSet<PCRAM> PCRAM { get; set; }
+        public DbSet<GPU> GPUs { get; set; }
+        public DbSet<Cooler> Coolers { get; set; }
+        public DbSet<CoolerSocketType> CoolerSocketType { get; set; }
     }
 }

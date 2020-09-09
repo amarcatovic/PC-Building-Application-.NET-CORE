@@ -31,6 +31,8 @@
     <Compile Remove="Migrations\20200811194057_AddPCEntity.Designer.cs" />
     <Compile Remove="Migrations\20200811194140_AddPCEntity.cs" />
     <Compile Remove="Migrations\20200811194140_AddPCEntity.Designer.cs" />
+    <Compile Remove="Migrations\20200909161320_AddGPUAndCoolerEntity.cs" />
+    <Compile Remove="Migrations\20200909161320_AddGPUAndCoolerEntity.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

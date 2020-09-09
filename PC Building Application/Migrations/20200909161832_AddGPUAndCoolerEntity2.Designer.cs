@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PC_Building_Application.Data;
 
 namespace PC_Building_Application.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200909161832_AddGPUAndCoolerEntity2")]
+    partial class AddGPUAndCoolerEntity2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,7 +108,7 @@ namespace PC_Building_Application.Migrations
 
                     b.HasIndex("PhotoId");
 
-                    b.ToTable("Coolers");
+                    b.ToTable("Cooler");
                 });
 
             modelBuilder.Entity("PC_Building_Application.Data.Models.GPU", b =>
@@ -162,7 +164,7 @@ namespace PC_Building_Application.Migrations
 
                     b.HasIndex("PhotoId");
 
-                    b.ToTable("GPUs");
+                    b.ToTable("GPU");
                 });
 
             modelBuilder.Entity("PC_Building_Application.Data.Models.Join_Classes.CoolerSocketType", b =>
