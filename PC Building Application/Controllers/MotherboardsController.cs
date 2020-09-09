@@ -87,7 +87,7 @@ namespace PC_Building_Application.Controllers
         ///         PhotoDescription:   "Awesome MoBo"
         ///
         /// </remarks>
-        /// <response code="201">Returns user info if okay</response>
+        /// <response code="201">Returns motherboard info if okay</response>
         /// <response code="400">If something goes wrong</response>  
         [HttpPost]
         public async Task<IActionResult> AddMotherboard([FromForm] MotherboardCreateDto motherboardCreateDto)
