@@ -34,6 +34,9 @@ namespace PC_Building_Application.Data.Repositories
                 .Include(st => st.Motherboards)
                 .ThenInclude(st => st.Manufacturer)
                 .Include(st => st.CPUs)
+                .ThenInclude(cpu => cpu.Manufacturer)
+                .Include(st => st.CPUs)
+                .ThenInclude(cpu => cpu.Photo)
                 .SingleOrDefaultAsync(st => st.Id == id);
 
             return socketTypeFromDb;
@@ -47,6 +50,9 @@ namespace PC_Building_Application.Data.Repositories
                 .Include(st => st.Motherboards)
                 .ThenInclude(st => st.Manufacturer)
                 .Include(st => st.CPUs)
+                .ThenInclude(cpu => cpu.Manufacturer)
+                .Include(st => st.CPUs)
+                .ThenInclude(cpu => cpu.Photo)
                 .ToListAsync();
 
             return socketTypesFromDb;
