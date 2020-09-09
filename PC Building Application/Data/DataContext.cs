@@ -27,6 +27,8 @@ namespace PC_Building_Application.Data
             modelBuilder.ApplyConfiguration(new GPUConfiguration());
             modelBuilder.ApplyConfiguration(new CoolerConfiguration());
             modelBuilder.ApplyConfiguration(new CoolerSocketTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new PowerSupplyConfiguration());
+            modelBuilder.ApplyConfiguration(new CaseConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
@@ -43,5 +45,7 @@ namespace PC_Building_Application.Data
         public DbSet<GPU> GPUs { get; set; }
         public DbSet<Cooler> Coolers { get; set; }
         public DbSet<CoolerSocketType> CoolerSocketType { get; set; }
+        public DbSet<PowerSupply> PowerSupplies { get; set; }
+        public DbSet<Case> Cases { get; set; }
     }
 }
