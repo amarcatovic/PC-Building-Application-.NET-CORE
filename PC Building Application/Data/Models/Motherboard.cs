@@ -18,6 +18,7 @@ namespace PC_Building_Application.Data.Models
         public bool HasRGB { get; set; }
         public int NoOfPCIeSlots { get; set; }
         public int NoOfRAMSlots { get; set; }
+        public float Price { get; set; }
         public Manufacturer Manufacturer { get; set; }
         public int ManufacturerId { get; set; }
 
