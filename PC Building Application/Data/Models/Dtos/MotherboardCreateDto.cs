@@ -17,6 +17,7 @@ namespace PC_Building_Application.Data.Models.Dtos
         public bool HasRGB { get; set; }
         public int NoOfPCIeSlots { get; set; }
         public int NoOfRAMSlots { get; set; }
+        public float Price { get; set; }
         public int ManufacturerId { get; set; }
         public int PhotoId { get; set; }
         public string PhotoDescription { get; set; }
