@@ -17,5 +17,6 @@ namespace PC_Building_Application.Data.Models
         public int CPUId { get; set; }
         public User User { get; set; }
         public string UserId { get; set; }
+        public ICollection<RAM> RAMs { get; set; }
     }
 }
