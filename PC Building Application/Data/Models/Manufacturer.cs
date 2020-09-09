@@ -13,6 +13,8 @@ namespace PC_Building_Application.Data.Models
         public string City { get; set; }
 
         public ICollection<CPU> CPUs { get; set; }
+        public ICollection<GPU> GPUs { get; set; }
+        public ICollection<Cooler> Coolers { get; set; }
         public ICollection<Motherboard> Motherboards { get; set; }
         public ICollection<RAM> RAMs { get; set; }
     }
