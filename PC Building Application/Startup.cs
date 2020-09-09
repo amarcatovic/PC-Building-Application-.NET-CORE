@@ -55,6 +55,7 @@ namespace PC_Building_Application
             services.AddScoped<IPhotoRepo, PhotoRepo>();
             services.AddScoped<IMotherboardRepo, MotherboardRepo>();
             services.AddScoped<ISocketTypeRepo, SocketTypeRepo>();
+            services.AddScoped<ICPURepo, CPURepo>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(opt =>
