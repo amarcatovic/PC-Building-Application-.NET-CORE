@@ -11,7 +11,7 @@ namespace PC_Building_Application.Migrations
 {
     [DbContext(typeof(DataContext))]
     [Migration("20200909115823_AddPriceToCPUž")]
-    partial class AddPriceToCPUž
+    partial class AddPriceToCPU
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
