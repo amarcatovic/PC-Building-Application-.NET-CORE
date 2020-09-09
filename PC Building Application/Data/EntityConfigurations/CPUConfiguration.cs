@@ -33,6 +33,10 @@ namespace PC_Building_Application.Data.EntityConfigurations
                .IsRequired();
 
             builder.HasIndex(cpu => cpu.Name);
+
+            builder.HasOne(cpu => cpu.Photo)
+                .WithMany(p => p.CPUs)
+                .HasForeignKey(cpu => cpu.PhotoId);
         }
     }
 }
