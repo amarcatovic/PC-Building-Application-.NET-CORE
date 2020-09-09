@@ -19,5 +19,6 @@ namespace PC_Building_Application.Data.Models
         public ICollection<RAM> RAMs { get; set; }
         public ICollection<PowerSupply> PowerSupplies { get; set; }
         public ICollection<Case> Cases { get; set; }
+        public ICollection<Storage> Storages { get; set; }
     }
 }
