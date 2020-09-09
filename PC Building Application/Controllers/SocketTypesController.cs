@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PC_Building_Application.Data.Models;
 using PC_Building_Application.Data.Models.Dtos.Socket_Type_Dtos;
 using PC_Building_Application.Data.Repositories.Interfaces;
 
@@ -103,6 +104,17 @@ namespace PC_Building_Application.Controllers
             return Ok(socketTypesReadDto);
         }
 
+        /// <summary>
+        /// Returns single socket type with id and name
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     GET /api/sockettypes/5
+        ///
+        /// </remarks>
+        /// <response code="200">if okay</response>
+        /// <response code="404">if not okay</response>
         [HttpGet("{id}", Name = "GetSocketTypeById")]
         public async Task<IActionResult> GetSocketTypeById(int id)
         {
@@ -115,6 +127,17 @@ namespace PC_Building_Application.Controllers
             return Ok(socketTypeReadDto);
         }
 
+        /// <summary>
+        /// Returns single socket type with id, name and all motherboards and cpus that use this socket type
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     GET /api/sockettypes/cpu/motherboard/5
+        ///
+        /// </remarks>
+        /// <response code="200">if okay</response>
+        /// <response code="404">if not okay</response>
         [HttpGet("cpu/motherboard/{id}")]
         public async Task<IActionResult> GetSocketTypesWithCpusAndMobosById(int id)
         {
@@ -127,6 +150,17 @@ namespace PC_Building_Application.Controllers
             return Ok(socketTypeReadDto);
         }
 
+        /// <summary>
+        /// Returns single socket type with id, name and all cpus that use this socket type
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     GET /api/sockettypes/cpu/5
+        ///
+        /// </remarks>
+        /// <response code="200">if okay</response>
+        /// <response code="404">if not okay</response>
         [HttpGet("cpu/{id}")]
         public async Task<IActionResult> GetSocketTypesWithCpusById(int id)
         {
@@ -139,6 +173,17 @@ namespace PC_Building_Application.Controllers
             return Ok(socketTypeReadDto);
         }
 
+        /// <summary>
+        /// Returns single socket type with id, name and all motherboards that use this socket type
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     GET /api/sockettypes/motherboard/5
+        ///
+        /// </remarks>
+        /// <response code="200">if okay</response>
+        /// <response code="404">if not okay</response>
         [HttpGet("motherboard/{id}")]
         public async Task<IActionResult> GetSocketTypesWithMotherboardsById(int id)
         {
@@ -151,7 +196,35 @@ namespace PC_Building_Application.Controllers
             return Ok(socketTypeReadDto);
         }
 
+        /// <summary>
+        /// Creates a new Socket Type
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /api/sockettypes
+        ///     
+        ///         {
+        ///             "name": "LGA1150"
+        ///         }
+        ///
+        /// </remarks>
+        /// <response code="201">if okay</response>
+        /// <response code="400">if not okay</response>
+        [HttpPost]
+        public async Task<IActionResult> CreateSocketType(SocketTypeCreateDto socketTypeCreateDto)
+        {
+            var socketType = _mapper.Map<SocketType>(socketTypeCreateDto);
+            await _repo.CreateSocketType(socketType);
+            
+            if(await _repo.Done())
+            {
+                var socketTypeReadDto = _mapper.Map<SocketTypesReadDto>(socketType);
+                return CreatedAtRoute(nameof(GetSocketTypeById), new { id = socketTypeReadDto.Id }, socketTypeReadDto);
+            }
 
+            return BadRequest("Something went wrong");
+        }
 
     }
 }
