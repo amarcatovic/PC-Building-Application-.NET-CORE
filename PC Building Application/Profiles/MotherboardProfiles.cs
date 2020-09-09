@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using PC_Building_Application.Data.Models;
 using PC_Building_Application.Data.Models.Dtos;
+using PC_Building_Application.Data.Models.Dtos.Motherboard_Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,8 @@ namespace PC_Building_Application.Profiles
                 .ForMember(dest => dest.Manufacturer, opt => opt.MapFrom(src => src.Manufacturer.Name))
                 .ForMember(dest => dest.SocketType, opt => opt.MapFrom(src => src.SocketType.Name));
             CreateMap<MotherboardCreateDto, Motherboard>();
-            CreateMap<Motherboard, MotherboardCreateDto>();
+            CreateMap<Motherboard, MotherboardPatchDto>();
+            CreateMap<MotherboardPatchDto, Motherboard>();
         }
     }
 }
