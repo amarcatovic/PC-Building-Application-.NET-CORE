@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PC_Building_Application.Data.EntityConfigurations;
 using PC_Building_Application.Data.Models;
+using PC_Building_Application.Data.Models.Join_Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,8 @@ namespace PC_Building_Application.Data
             modelBuilder.ApplyConfiguration(new CPUConfiguration());
             modelBuilder.ApplyConfiguration(new PCConfiguration());
             modelBuilder.ApplyConfiguration(new PhotoConfiguration());
+            modelBuilder.ApplyConfiguration(new RAMConfiguration());
+            modelBuilder.ApplyConfiguration(new PCRAMConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
@@ -32,5 +35,7 @@ namespace PC_Building_Application.Data
         public DbSet<CPU> CPUs { get; set; }
         public DbSet<PC> PCs { get; set; }
         public DbSet<Photo> Photos { get; set; }
+        public DbSet<RAM> RAMs { get; set; }
+        public DbSet<PCRAM> PCRAM { get; set; }
     }
 }
