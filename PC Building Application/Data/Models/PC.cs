@@ -24,6 +24,8 @@ namespace PC_Building_Application.Data.Models
         public int CoolerId { get; set; }
         public PowerSupply PowerSupply { get; set; }
         public int PowerSupplyId { get; set; }
+        public Case Case { get; set; }
+        public int CaseId { get; set; }
         public ICollection<PCRAM> PCRAMs { get; set; }
     }
 }
