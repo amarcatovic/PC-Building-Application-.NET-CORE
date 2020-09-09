@@ -34,6 +34,10 @@ namespace PC_Building_Application.Data.EntityConfigurations
 
             builder.Property(ram => ram.Type)
                 .IsRequired();
+
+            builder.HasOne(ram => ram.Manufacturer)
+                .WithMany(m => m.RAMs)
+                .HasForeignKey(ram => ram.ManufacturerId);
         }
     }
 }
