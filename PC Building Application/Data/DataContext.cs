@@ -29,6 +29,9 @@ namespace PC_Building_Application.Data
             modelBuilder.ApplyConfiguration(new CoolerSocketTypeConfiguration());
             modelBuilder.ApplyConfiguration(new PowerSupplyConfiguration());
             modelBuilder.ApplyConfiguration(new CaseConfiguration());
+            modelBuilder.ApplyConfiguration(new StorageTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new StorageConfiguration());
+            modelBuilder.ApplyConfiguration(new PCStorageConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
@@ -47,5 +50,8 @@ namespace PC_Building_Application.Data
         public DbSet<CoolerSocketType> CoolerSocketType { get; set; }
         public DbSet<PowerSupply> PowerSupplies { get; set; }
         public DbSet<Case> Cases { get; set; }
+        public DbSet<StorageType> StorageTypes { get; set; }
+        public DbSet<Storage> Storages { get; set; }
+        public DbSet<PCStorage> PCStorage { get; set; }
     }
 }
