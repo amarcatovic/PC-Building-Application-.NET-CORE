@@ -27,5 +27,6 @@ namespace PC_Building_Application.Data.Models
         public Case Case { get; set; }
         public int CaseId { get; set; }
         public ICollection<PCRAM> PCRAMs { get; set; }
+        public ICollection<PCStorage> PCStorages { get; set; }
     }
 }
