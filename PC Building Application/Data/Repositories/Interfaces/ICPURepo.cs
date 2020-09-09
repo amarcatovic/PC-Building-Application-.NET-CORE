@@ -9,7 +9,7 @@ namespace PC_Building_Application.Data.Repositories.Interfaces
 {
     public interface ICPURepo
     {
-        Task<ICollection<CPU>> GetCPUs();
+        Task<IEnumerable<CPU>> GetCPUs();
         Task<CPU> GetCPUById(int id);
         Task CreateCPU(CPU cpu, PhotoToCreateDto photo);
         Task<bool> Done();
