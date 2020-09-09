@@ -12,6 +12,7 @@ namespace PC_Building_Application.Data.Models
         public string Name { get; set; }
         public DateTime Released { get; set; }
         public bool IsWaterCooler { get; set; }
+        public byte NoOfFans { get; set; }
         public bool HasRGB { get; set; }
         public float Price { get; set; }
         public Photo Photo { get; set; }
