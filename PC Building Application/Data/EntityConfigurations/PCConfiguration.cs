@@ -52,6 +52,11 @@ namespace PC_Building_Application.Data.EntityConfigurations
                 .WithMany(ps => ps.PCs)
                 .HasForeignKey(pc => pc.PowerSupplyId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(pc => pc.Case)
+                .WithMany(c => c.PCs)
+                .HasForeignKey(pc => pc.CaseId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
