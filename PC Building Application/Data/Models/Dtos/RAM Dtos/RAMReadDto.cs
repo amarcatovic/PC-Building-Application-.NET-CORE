@@ -15,6 +15,6 @@ namespace PC_Building_Application.Data.Models.Dtos.RAM_Dtos
         public string CapacityPerStick { get; set; }
         public bool HasRGB { get; set; }
         public float Price { get; set; }
-        public Photo Photo { get; set; }
+        public PhotoReturnDto Photo { get; set; }
     }
 }
