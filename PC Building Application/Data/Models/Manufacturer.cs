@@ -17,5 +17,6 @@ namespace PC_Building_Application.Data.Models
         public ICollection<Cooler> Coolers { get; set; }
         public ICollection<Motherboard> Motherboards { get; set; }
         public ICollection<RAM> RAMs { get; set; }
+        public ICollection<PowerSupply> PowerSupplies { get; set; }
     }
 }
