@@ -12,7 +12,8 @@ namespace PC_Building_Application.Profiles
     {
         public RAMProfiles()
         {
-            CreateMap<RAM, RAMReadDto>();
+            CreateMap<RAM, RAMReadDto>()
+                .ForMember(dest => dest.Manufacturer, opt => opt.MapFrom(src => src.Manufacturer.Name));
             CreateMap<RAM, RAMPatchDto>();
             CreateMap<RAMPatchDto, RAM>();
             CreateMap<RAMCreateDto, RAM>();
