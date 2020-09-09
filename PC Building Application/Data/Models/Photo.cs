@@ -18,6 +18,7 @@ namespace PC_Building_Application.Data.Models
         public ICollection<GPU> GPUs { get; set; }
         public ICollection<Motherboard> Motherboards { get; set; }
         public ICollection<Cooler> Coolers { get; set; }
+        public ICollection<PowerSupply> PowerSupplies { get; set; }
         public ICollection<User> Users { get; set; }
     }
 }
