@@ -37,6 +37,7 @@ namespace PC_Building_Application.Data.Repositories
         {
             var ramsFromDb = await _context.RAMs
                 .Include(ram => ram.Photo)
+                .Include(ram => ram.Manufacturer)
                 .ToListAsync();
 
             return ramsFromDb;
@@ -46,6 +47,7 @@ namespace PC_Building_Application.Data.Repositories
         {
             var ramsFromDb = await _context.RAMs
                 .Include(ram => ram.Photo)
+                .Include(ram => ram.Manufacturer)
                 .SingleOrDefaultAsync(ram => ram.Id == id);
 
             return ramsFromDb;
