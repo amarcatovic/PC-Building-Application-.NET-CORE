@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using PC_Building_Application.Data.Models;
 using PC_Building_Application.Data.Models.Dtos;
@@ -23,6 +24,15 @@ namespace PC_Building_Application.Controllers
         {
             _mapper = mapper;
             _repo = repo;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetCPUs()
+        {
+            var cpusFromDb = await _repo.GetCPUs();
+            var cpuReadDto = _mapper.Map<IEnumerable<CPUReadDto>>(cpusFromDb);
+
+            return Ok(cpuReadDto);
         }
 
         [HttpGet("{id}", Name = "GetCPUById")]
@@ -54,6 +64,25 @@ namespace PC_Building_Application.Controllers
             }
 
             return BadRequest("Something went wrong. Review data and try again");
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> PatchCPU(int id, JsonPatchDocument<CPUPatchDto> patchDocument)
+        {
+            var cpuFromDb = await _repo.GetCPUById(id);
+            if(cpuFromDb == null)
+                return NotFound($"CPU with an id {id} was not found!");
+
+            var cpuPatch = _mapper.Map<CPUPatchDto>(cpuFromDb);
+            patchDocument.ApplyTo(cpuPatch, ModelState);
+            if (!TryValidateModel(cpuPatch))
+                return ValidationProblem(ModelState);
+
+            _mapper.Map(cpuPatch, cpuFromDb);
+            if (await _repo.Done())
+                return NoContent();
+
+            return BadRequest("Something went wrong!");
         }
     }
 }
