@@ -18,6 +18,8 @@ namespace PC_Building_Application.Data.Models
         public int SingleThreadRating { get; set; }
         public Manufacturer Manufacturer { get; set; }
         public int ManufacturerId { get; set; }
+        public Photo Photo { get; set; }
+        public int PhotoId { get; set; }
         public ICollection<PC> PCs { get; set; }
     }
 }
