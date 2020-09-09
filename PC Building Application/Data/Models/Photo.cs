@@ -13,6 +13,8 @@ namespace PC_Building_Application.Data.Models
         public DateTime DateAdded { get; set; }
         public string PublicId { get; set; }
 
+        public ICollection<RAM> RAMs { get; set; }
+        public ICollection<CPU> CPUs { get; set; }
         public ICollection<Motherboard> Motherboards { get; set; }
         public ICollection<User> Users { get; set; }
 
