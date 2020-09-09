@@ -26,6 +26,16 @@ namespace PC_Building_Application.Controllers
             _repo = repo;
         }
 
+        /// <summary>
+        /// Returns all cpus
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     GET /api/cpus
+        ///
+        /// </remarks>
+        /// <response code="200">Returns cpus info if okay</response> 
         [HttpGet]
         public async Task<IActionResult> GetCPUs()
         {
@@ -35,6 +45,17 @@ namespace PC_Building_Application.Controllers
             return Ok(cpuReadDto);
         }
 
+        /// <summary>
+        /// Returns single cpu which id matches requested id
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     GET /api/cpus/1
+        ///
+        /// </remarks>
+        /// <response code="200">Returns single cpu info if okay</response>
+        /// <response code="404">If something goes wrong</response> 
         [HttpGet("{id}", Name = "GetCPUById")]
         public async Task<IActionResult> GetCPUById(int id)
         {
@@ -46,6 +67,28 @@ namespace PC_Building_Application.Controllers
             return Ok(cpuReadDto);
         }
 
+        /// <summary>
+        /// Creates cpu from form-data
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /api/cpus
+        ///     form-data:
+        ///         Name:                   "New CPU",
+        ///         Released:               "01/05/2020",
+        ///         SocketTypeId:           1,
+        ///         Clockspeed:             3.6 GHz
+        ///         TurboSpeed:             4.2 GHz,
+        ///         SingleThreadRating:     17234, BASED ON https://www.cpubenchmark.net/
+        ///         ManufacturerId:         1,
+        ///         Price:                  319.99,
+        ///         PhotoFile:              type: File,
+        ///         PhotoDescription:       "Awesome New CPU"
+        ///
+        /// </remarks>
+        /// <response code="201">Returns cpu info if okay</response>
+        /// <response code="400">If something goes wrong</response>  
         [HttpPost]
         public async Task<IActionResult> AddCPU([FromForm] CPUCreateDto cpuCreateDto)
         {
@@ -66,6 +109,24 @@ namespace PC_Building_Application.Controllers
             return BadRequest("Something went wrong. Review data and try again");
         }
 
+        /// <summary>
+        /// Updates values given in JSON document array
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PATCH /api/cpus/1
+        ///     [
+        ///         {
+        ///             "op": "replace",
+        ///             "path": "/Price",
+        ///             "value": "300"
+        ///         }
+        ///     ]
+        ///
+        /// </remarks>
+        /// <response code="204">Returns no content if okay</response>
+        /// <response code="404">If something goes wrong</response>  
         [HttpPatch("{id}")]
         public async Task<IActionResult> PatchCPU(int id, JsonPatchDocument<CPUPatchDto> patchDocument)
         {
