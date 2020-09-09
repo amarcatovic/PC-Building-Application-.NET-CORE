@@ -55,7 +55,8 @@ namespace PC_Building_Application.Helper
                     new SocketType() { Name = "LGA1150" },
                     new SocketType() { Name = "LGA1151" },
                     new SocketType() { Name = "LGA1155" },
-                    new SocketType() { Name = "LGA2066" }
+                    new SocketType() { Name = "LGA2066" },
+                    new SocketType() { Name = "Other" }
                 );
             }
             else
@@ -78,7 +79,8 @@ namespace PC_Building_Application.Helper
                     new Manufacturer() { Name = "Samsung", City = "Seoul", Country = "South Korea" },
                     new Manufacturer() { Name = "Kingston Technology", City = "Fountain Valley, CA", Country = "U.S.A" },
                     new Manufacturer() { Name = "Micron Technology", City = "Boise, ID", Country = "U.S.A" },
-                    new Manufacturer() { Name = "Cooler Master", City = "New Taipei", Country = "Taiwan" }
+                    new Manufacturer() { Name = "Cooler Master", City = "New Taipei", Country = "Taiwan" },
+                    new Manufacturer() { Name = "Other", City = "N/A", Country = "N/A" }
                 );
             }
             else
