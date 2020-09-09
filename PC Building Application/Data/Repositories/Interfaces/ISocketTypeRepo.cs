@@ -9,6 +9,6 @@ namespace PC_Building_Application.Data.Repositories.Interfaces
         Task<IEnumerable<SocketType>> GetSocketTypes();
         Task<SocketType> GetSingleSocketTypeById(int id);
         Task CreateSocketType(SocketType socketType);
-        bool Done();
+        Task<bool> Done();
     }
 }
