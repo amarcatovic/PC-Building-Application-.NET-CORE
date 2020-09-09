@@ -16,6 +16,7 @@ namespace PC_Building_Application.Data.Models.Dtos.CPU_Dtos
         public int NoOfCores { get; set; }
         public int SingleThreadRating { get; set; }
         public int ManufacturerId { get; set; }
+        public float Price { get; set; }
         public int PhotoId { get; set; }
         public string PhotoDescription { get; set; }
         public IFormFile PhotoFile { get; set; }
