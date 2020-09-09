@@ -88,22 +88,6 @@ namespace PC_Building_Application.Helper
                 Console.WriteLine("There are some Manufacturers in the database!");
             }
 
-            if(!context.StorageTypes.Any())
-            {
-                Console.WriteLine("Adding the most popular Storage types to the database!");
-                context.AddRange
-                (
-                    new StorageType() { Name = "M.2 SSD"},
-                    new StorageType() { Name = "SATA SSD"},
-                    new StorageType() { Name = "5400 HDD" },
-                    new StorageType() { Name = "7200 HDD" }
-                );
-            }
-            else
-            {
-                Console.WriteLine("There are some Storage Types in the database!");
-            }
-
             context.SaveChanges();
         }
     }
