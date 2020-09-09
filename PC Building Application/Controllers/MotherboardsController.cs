@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using PC_Building_Application.Data.Models;
 using PC_Building_Application.Data.Models.Dtos;
+using PC_Building_Application.Data.Models.Dtos.Motherboard_Dtos;
 using PC_Building_Application.Data.Repositories.Interfaces;
 
 namespace PC_Building_Application.Controllers
@@ -127,13 +128,13 @@ namespace PC_Building_Application.Controllers
         /// <response code="204">Returns no content if okay</response>
         /// <response code="404">If something goes wrong</response>  
         [HttpPatch("{id}")]
-        public async Task<IActionResult> PatchMotherboard(int id, JsonPatchDocument<MotherboardCreateDto> patchDocument)
+        public async Task<IActionResult> PatchMotherboard(int id, JsonPatchDocument<MotherboardPatchDto> patchDocument)
         {
             var moboFromDb = await _repo.GetMotherboardById(id);
             if (moboFromDb == null)
                 return NotFound($"Motherboard with id {id} was not found");
 
-            var motherboardPatch = _mapper.Map<MotherboardCreateDto>(moboFromDb);
+            var motherboardPatch = _mapper.Map<MotherboardPatchDto>(moboFromDb);
             patchDocument.ApplyTo(motherboardPatch, ModelState);
 
             if (!TryValidateModel(motherboardPatch))
