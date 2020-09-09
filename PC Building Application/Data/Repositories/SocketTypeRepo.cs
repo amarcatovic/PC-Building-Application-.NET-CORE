@@ -30,6 +30,9 @@ namespace PC_Building_Application.Data.Repositories
         {
             var socketTypeFromDb = await _context.SocketTypes
                 .Include(st => st.Motherboards)
+                .ThenInclude(m => m.Photo)
+                .Include(st => st.Motherboards)
+                .ThenInclude(st => st.Manufacturer)
                 .Include(st => st.CPUs)
                 .SingleOrDefaultAsync(st => st.Id == id);
 
@@ -40,6 +43,9 @@ namespace PC_Building_Application.Data.Repositories
         {
             var socketTypesFromDb = await _context.SocketTypes
                 .Include(st => st.Motherboards)
+                .ThenInclude(m => m.Photo)
+                .Include(st => st.Motherboards)
+                .ThenInclude(st => st.Manufacturer)
                 .Include(st => st.CPUs)
                 .ToListAsync();
 
