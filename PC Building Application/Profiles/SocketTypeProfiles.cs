@@ -9,6 +9,7 @@ namespace PC_Building_Application.Profiles
         public SocketTypeProfiles()
         {
             CreateMap<SocketTypeCreateDto, SocketType>();
+            CreateMap<SocketType, SocketTypesReadDto>();
             CreateMap<SocketType, SocketTypeReadCPUAndMotherboards>();
             CreateMap<SocketType, SocketTypeReadCPUDto>();
             CreateMap<SocketType, SocketTypeReadMotherboardsDto>();
