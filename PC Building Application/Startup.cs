@@ -124,6 +124,8 @@ namespace PC_Building_Application
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "PC Builder API");
             });
+
+            PopulateDb.Populate(app);
         }
     }
 }
