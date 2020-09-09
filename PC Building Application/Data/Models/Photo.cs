@@ -20,6 +20,7 @@ namespace PC_Building_Application.Data.Models
         public ICollection<Cooler> Coolers { get; set; }
         public ICollection<PowerSupply> PowerSupplies { get; set; }
         public ICollection<Case> Cases { get; set; }
+        public ICollection<Storage> Storages { get; set; }
         public ICollection<User> Users { get; set; }
     }
 }
