@@ -20,7 +20,8 @@ namespace PC_Building_Application.Data.Models
         public float Price { get; set; }
         public Photo Photo { get; set; }
         public int PhotoId { get; set; }
-        public Manufacturer ManufacturerId { get; set; }
+        public Manufacturer Manufacturer { get; set; }
+        public int ManufacturerId { get; set; }
         public ICollection<PC> PCs { get; set; }
     }
 }
