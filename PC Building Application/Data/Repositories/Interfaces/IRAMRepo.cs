@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PC_Building_Application.Data.Repositories.Interfaces
 {
-    interface IRAMRepo
+    public interface IRAMRepo
     {
         Task<IEnumerable<RAM>> GetAllRAMs();
         Task<RAM> GetRAMById(int id);
