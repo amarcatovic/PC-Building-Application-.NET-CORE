@@ -98,6 +98,7 @@ namespace PC_Building_Application.Data.Repositories
         {
             var manufacturerFromDb = await _context.Manufacturers
                 .Include(m => m.Cases)
+                .ThenInclude(c => c.Photo)
                 .Include(m => m.Photo)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
@@ -108,6 +109,8 @@ namespace PC_Building_Application.Data.Repositories
         {
             var manufacturerFromDb = await _context.Manufacturers
                 .Include(m => m.Coolers)
+                .ThenInclude(c => c.CoolerSocketTypes)
+                .ThenInclude(cst => cst.SocketType)
                 .Include(m => m.Photo)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
@@ -118,6 +121,7 @@ namespace PC_Building_Application.Data.Repositories
         {
             var manufacturerFromDb = await _context.Manufacturers
                 .Include(m => m.CPUs)
+                .ThenInclude(cpu => cpu.SocketType)
                 .Include(m => m.Photo)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
@@ -138,6 +142,7 @@ namespace PC_Building_Application.Data.Repositories
         {
             var manufacturerFromDb = await _context.Manufacturers
                 .Include(m => m.Motherboards)
+                .ThenInclude(mobo => mobo.SocketType)
                 .Include(m => m.Photo)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
