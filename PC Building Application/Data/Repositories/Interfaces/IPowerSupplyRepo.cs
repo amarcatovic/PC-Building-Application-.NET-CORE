@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PC_Building_Application.Data.Repositories.Interfaces
 {
-    public interface IPowerSupplycs
+    public interface IPowerSupplyRepo
     {
         Task<IEnumerable<PowerSupply>> GetAllPowerSupplys();
         Task<PowerSupply> GetPowerSupplyById(int id);
