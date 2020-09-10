@@ -39,6 +39,8 @@ namespace PC_Building_Application.Data.Repositories
             var manufacturersFromDb = await _context.Manufacturers
                 .Include(m => m.CPUs)
                 .ThenInclude(cpu => cpu.Photo)
+                .Include(m => m.CPUs)
+                .ThenInclude(cpu => cpu.SocketType)
                 .Include(m => m.GPUs)
                 .ThenInclude(gpu => gpu.Photo)
                 .Include(m => m.Coolers)
@@ -111,6 +113,8 @@ namespace PC_Building_Application.Data.Repositories
                 .Include(m => m.Coolers)
                 .ThenInclude(c => c.CoolerSocketTypes)
                 .ThenInclude(cst => cst.SocketType)
+                .Include(m => m.Coolers)
+                .ThenInclude(c => c.Photo)
                 .Include(m => m.Photo)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
@@ -122,6 +126,8 @@ namespace PC_Building_Application.Data.Repositories
             var manufacturerFromDb = await _context.Manufacturers
                 .Include(m => m.CPUs)
                 .ThenInclude(cpu => cpu.SocketType)
+                .Include(m => m.CPUs)
+                .ThenInclude(cpu => cpu.Photo)
                 .Include(m => m.Photo)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
@@ -132,6 +138,7 @@ namespace PC_Building_Application.Data.Repositories
         {
             var manufacturerFromDb = await _context.Manufacturers
                 .Include(m => m.GPUs)
+                .ThenInclude(gpu => gpu.Photo)
                 .Include(m => m.Photo)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
@@ -143,6 +150,8 @@ namespace PC_Building_Application.Data.Repositories
             var manufacturerFromDb = await _context.Manufacturers
                 .Include(m => m.Motherboards)
                 .ThenInclude(mobo => mobo.SocketType)
+                .Include(m => m.Motherboards)
+                .ThenInclude(mobo => mobo.Photo)
                 .Include(m => m.Photo)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
@@ -153,6 +162,7 @@ namespace PC_Building_Application.Data.Repositories
         {
             var manufacturerFromDb = await _context.Manufacturers
                 .Include(m => m.PowerSupplies)
+                .ThenInclude(psu => psu.Photo)
                 .Include(m => m.Photo)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
@@ -163,6 +173,7 @@ namespace PC_Building_Application.Data.Repositories
         {
             var manufacturerFromDb = await _context.Manufacturers
                 .Include(m => m.RAMs)
+                .ThenInclude(ram => ram.Photo)
                 .Include(m => m.Photo)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
@@ -173,6 +184,7 @@ namespace PC_Building_Application.Data.Repositories
         {
             var manufacturerFromDb = await _context.Manufacturers
                 .Include(m => m.Storages)
+                .ThenInclude(s => s.StorageType)
                 .Include(m => m.Photo)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
