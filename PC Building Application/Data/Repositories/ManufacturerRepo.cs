@@ -1,4 +1,5 @@
-﻿using PC_Building_Application.Data.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using PC_Building_Application.Data.Models;
 using PC_Building_Application.Data.Models.Dtos;
 using PC_Building_Application.Data.Repositories.Interfaces;
 using System;
@@ -20,68 +21,131 @@ namespace PC_Building_Application.Data.Repositories
 
         public async Task CraeteManufacturer(Manufacturer manufacturer, PhotoToCreateDto photo)
         {
-            /*var createdPhoto = await _photoRepo.AddPhotoForComponent(photo);
+            var createdPhoto = await _photoRepo.AddPhotoForComponent(photo);
             if (createdPhoto == null)
                 return;
 
             manufacturer.PhotoId = createdPhoto.Id;
-            await _context.Cases.AddAsync(manufacturer);*/
-            throw new NotImplementedException();
+            await _context.Manufacturers.AddAsync(manufacturer);
         }
 
         public async Task<bool> Done()
         {
-            throw new NotImplementedException();
+            return await (_context.SaveChangesAsync()) >= 0;
         }
 
         public async Task<IEnumerable<Manufacturer>> GetAllManufacturers()
         {
-            throw new NotImplementedException();
+            var manufacturersFromDb = await _context.Manufacturers
+                .Include(m => m.CPUs)
+                .Include(m => m.GPUs)
+                .Include(m => m.Coolers)
+                .Include(m => m.Motherboards)
+                .Include(m => m.RAMs)
+                .Include(m => m.PowerSupplies)
+                .Include(m => m.Cases)
+                .Include(m => m.Storages)
+                .Include(m => m.Photo)
+                .ToListAsync();
+
+            return manufacturersFromDb;
         }
 
         public async Task<Manufacturer> GetManufacturerById(int id)
         {
-            throw new NotImplementedException();
+            var manufacturerFromDb = await _context.Manufacturers
+                .Include(m => m.CPUs)
+                .Include(m => m.GPUs)
+                .Include(m => m.Coolers)
+                .Include(m => m.Motherboards)
+                .Include(m => m.RAMs)
+                .Include(m => m.PowerSupplies)
+                .Include(m => m.Cases)
+                .Include(m => m.Storages)
+                .Include(m => m.Photo)
+                .SingleOrDefaultAsync(m => m.Id == id);
+
+            return manufacturerFromDb;
         }
 
         public async Task<Manufacturer> GetManufacturerCasesById(int id)
         {
-            throw new NotImplementedException();
+            var manufacturerFromDb = await _context.Manufacturers
+                .Include(m => m.Cases)
+                .Include(m => m.Photo)
+                .SingleOrDefaultAsync(m => m.Id == id);
+
+            return manufacturerFromDb;
         }
 
         public async Task<Manufacturer> GetManufacturerCoolersById(int id)
         {
-            throw new NotImplementedException();
+            var manufacturerFromDb = await _context.Manufacturers
+                .Include(m => m.Coolers)
+                .Include(m => m.Photo)
+                .SingleOrDefaultAsync(m => m.Id == id);
+
+            return manufacturerFromDb;
         }
 
         public async Task<Manufacturer> GetManufacturerCpusById(int id)
         {
-            throw new NotImplementedException();
+            var manufacturerFromDb = await _context.Manufacturers
+                .Include(m => m.CPUs)
+                .Include(m => m.Photo)
+                .SingleOrDefaultAsync(m => m.Id == id);
+
+            return manufacturerFromDb;
         }
 
         public async Task<Manufacturer> GetManufacturerGpusById(int id)
         {
-            throw new NotImplementedException();
+            var manufacturerFromDb = await _context.Manufacturers
+                .Include(m => m.GPUs)
+                .Include(m => m.Photo)
+                .SingleOrDefaultAsync(m => m.Id == id);
+
+            return manufacturerFromDb;
         }
 
         public async Task<Manufacturer> GetManufacturerMotherboardsById(int id)
         {
-            throw new NotImplementedException();
+            var manufacturerFromDb = await _context.Manufacturers
+                .Include(m => m.Motherboards)
+                .Include(m => m.Photo)
+                .SingleOrDefaultAsync(m => m.Id == id);
+
+            return manufacturerFromDb;
         }
 
         public async Task<Manufacturer> GetManufacturerPowerSuppliesById(int id)
         {
-            throw new NotImplementedException();
+            var manufacturerFromDb = await _context.Manufacturers
+                .Include(m => m.PowerSupplies)
+                .Include(m => m.Photo)
+                .SingleOrDefaultAsync(m => m.Id == id);
+
+            return manufacturerFromDb;
         }
 
         public async Task<Manufacturer> GetManufacturerRamsById(int id)
         {
-            throw new NotImplementedException();
+            var manufacturerFromDb = await _context.Manufacturers
+                .Include(m => m.RAMs)
+                .Include(m => m.Photo)
+                .SingleOrDefaultAsync(m => m.Id == id);
+
+            return manufacturerFromDb;
         }
 
         public async Task<Manufacturer> GetManufacturerStoragesById(int id)
         {
-            throw new NotImplementedException();
+            var manufacturerFromDb = await _context.Manufacturers
+                .Include(m => m.Storages)
+                .Include(m => m.Photo)
+                .SingleOrDefaultAsync(m => m.Id == id);
+
+            return manufacturerFromDb;
         }
     }
 }
