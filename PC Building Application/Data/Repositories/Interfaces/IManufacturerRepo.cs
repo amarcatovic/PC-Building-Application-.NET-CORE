@@ -9,7 +9,17 @@ namespace PC_Building_Application.Data.Repositories.Interfaces
 {
     public interface IManufacturerRepo
     {
+        Task<IEnumerable<Manufacturer>> GetAllManufacturersLight();
         Task<IEnumerable<Manufacturer>> GetAllManufacturers();
+        Task<IEnumerable<Manufacturer>> GetManufacturerCpus();
+        Task<IEnumerable<Manufacturer>> GetManufacturerGpus();
+        Task<IEnumerable<Manufacturer>> GetManufacturerCoolers();
+        Task<IEnumerable<Manufacturer>> GetManufacturerMotherboards();
+        Task<IEnumerable<Manufacturer>> GetManufacturerRams();
+        Task<IEnumerable<Manufacturer>> GetManufacturerPowerSupplies();
+        Task<IEnumerable<Manufacturer>> GetManufacturerCases();
+        Task<IEnumerable<Manufacturer>> GetManufacturerStorages();
+        Task<Manufacturer> GetManufacturerByIdLight(int id);
         Task<Manufacturer> GetManufacturerById(int id);
         Task<Manufacturer> GetManufacturerCpusById(int id);
         Task<Manufacturer> GetManufacturerGpusById(int id);
