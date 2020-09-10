@@ -32,6 +32,14 @@ namespace PC_Building_Application.Data.EntityConfigurations
                 .HasForeignKey(cpu => cpu.ManufacturerId);
 
             builder.HasIndex(m => m.Name);
+
+            builder.Property(m => m.PhotoId)
+                .HasDefaultValue(1);
+
+            builder.HasOne(m => m.Photo)
+                .WithMany(p => p.Manufacturers)
+                .HasForeignKey(m => m.PhotoId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
