@@ -38,13 +38,26 @@ namespace PC_Building_Application.Data.Repositories
         {
             var manufacturersFromDb = await _context.Manufacturers
                 .Include(m => m.CPUs)
+                .ThenInclude(cpu => cpu.Photo)
                 .Include(m => m.GPUs)
+                .ThenInclude(gpu => gpu.Photo)
                 .Include(m => m.Coolers)
+                .ThenInclude(c => c.Photo)
+                .Include(m => m.Coolers)
+                .ThenInclude(c => c.CoolerSocketTypes)
+                .ThenInclude(cst => cst.SocketType)
                 .Include(m => m.Motherboards)
+                .ThenInclude(mobo => mobo.Photo)
                 .Include(m => m.RAMs)
+                .ThenInclude(r => r.Photo)
                 .Include(m => m.PowerSupplies)
+                .ThenInclude(ps => ps.Photo)
                 .Include(m => m.Cases)
+                .ThenInclude(c => c.Photo)
                 .Include(m => m.Storages)
+                .ThenInclude(s => s.Photo)
+                .Include(m => m.Storages)
+                .ThenInclude(st => st.StorageType)
                 .Include(m => m.Photo)
                 .ToListAsync();
 
@@ -55,13 +68,26 @@ namespace PC_Building_Application.Data.Repositories
         {
             var manufacturerFromDb = await _context.Manufacturers
                 .Include(m => m.CPUs)
+                .ThenInclude(cpu => cpu.Photo)
                 .Include(m => m.GPUs)
+                .ThenInclude(gpu => gpu.Photo)
                 .Include(m => m.Coolers)
+                .ThenInclude(c => c.Photo)
+                .Include(m => m.Coolers)
+                .ThenInclude(c => c.CoolerSocketTypes)
+                .ThenInclude(cst => cst.SocketType)
                 .Include(m => m.Motherboards)
+                .ThenInclude(mobo => mobo.Photo)
                 .Include(m => m.RAMs)
+                .ThenInclude(r => r.Photo)
                 .Include(m => m.PowerSupplies)
+                .ThenInclude(ps => ps.Photo)
                 .Include(m => m.Cases)
+                .ThenInclude(c => c.Photo)
                 .Include(m => m.Storages)
+                .ThenInclude(s => s.Photo)
+                .Include(m => m.Storages)
+                .ThenInclude(st => st.StorageType)
                 .Include(m => m.Photo)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
