@@ -13,6 +13,7 @@ namespace PC_Building_Application.Data.Models.Dtos.Storage_Dtos
         public string Capacity { get; set; }
         public string StorageType { get; set; }
         public bool HasCooling { get; set; }
+        public float Price { get; set; }
         public PhotoReturnDto Photo { get; set; }
         public string Manufacturer { get; set; }
     }
