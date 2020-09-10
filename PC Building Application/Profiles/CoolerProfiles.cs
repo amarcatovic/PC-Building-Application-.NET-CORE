@@ -22,6 +22,7 @@ namespace PC_Building_Application.Profiles
 
             CreateMap<Cooler, CoolerPatchDto>().ReverseMap();
             CreateMap<CoolerCreateDto, Cooler>();
+            CreateMap<Cooler, CoolerCreatedReadDto>();
         }
     }
 }
