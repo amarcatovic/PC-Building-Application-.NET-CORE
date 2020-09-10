@@ -16,7 +16,7 @@ namespace PC_Building_Application.Data.Models.Dtos.Power_Supply_Dtos
         public byte NoOfSATACables { get; set; }
         public byte NoOfCPUCables { get; set; }
         public bool Has24PinCable { get; set; }
-        public byte EfficiencyRating { get; set; }
+        public string EfficiencyRating { get; set; }
         public float Price { get; set; }
         public PhotoReturnDto Photo { get; set; }
         public string Manufacturer { get; set; }
