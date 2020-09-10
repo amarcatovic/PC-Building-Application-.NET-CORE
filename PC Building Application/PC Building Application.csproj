@@ -33,6 +33,10 @@
     <Compile Remove="Migrations\20200811194140_AddPCEntity.Designer.cs" />
     <Compile Remove="Migrations\20200909161320_AddGPUAndCoolerEntity.cs" />
     <Compile Remove="Migrations\20200909161320_AddGPUAndCoolerEntity.Designer.cs" />
+    <Compile Remove="Migrations\20200910155831_AddPhotoToManufacturer.cs" />
+    <Compile Remove="Migrations\20200910155831_AddPhotoToManufacturer.Designer.cs" />
+    <Compile Remove="Migrations\20200910160019_AddPhotoIdToManufacturer.cs" />
+    <Compile Remove="Migrations\20200910160019_AddPhotoIdToManufacturer.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
