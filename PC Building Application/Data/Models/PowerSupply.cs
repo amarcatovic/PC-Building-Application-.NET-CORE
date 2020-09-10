@@ -16,7 +16,7 @@ namespace PC_Building_Application.Data.Models
         public byte NoOfSATACables { get; set; }
         public byte NoOfCPUCables { get; set; }
         public bool Has24PinCable { get; set; }
-        public byte EfficiencyRating { get; set; }
+        public string EfficiencyRating { get; set; }
         public float Price { get; set; }
         public Photo Photo { get; set; }
         public int PhotoId { get; set; }
