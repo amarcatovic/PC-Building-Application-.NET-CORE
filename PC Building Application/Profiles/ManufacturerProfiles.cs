@@ -22,6 +22,7 @@ namespace PC_Building_Application.Profiles
             CreateMap<Manufacturer, ManufacturerReadAllStoragesDto>();
             CreateMap<Manufacturer, ManufacturerReadCpusDto>();
             CreateMap<ManufacturerCreateDto, Manufacturer>();
+            CreateMap<Manufacturer, ManufacturersPatchDto>().ReverseMap();
         }
     }
 }
