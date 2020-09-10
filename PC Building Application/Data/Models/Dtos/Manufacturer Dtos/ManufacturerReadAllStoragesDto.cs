@@ -13,6 +13,6 @@ namespace PC_Building_Application.Data.Models.Dtos.Manufacturer_Dtos
         public string Country { get; set; }
         public string City { get; set; }
         public PhotoReturnDto Photo { get; set; }
-        public ICollection<StorageReadDto> Storage { get; set; }
+        public ICollection<StorageReadDto> Storages { get; set; }
     }
 }
