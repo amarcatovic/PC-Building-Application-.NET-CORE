@@ -17,6 +17,6 @@ namespace PC_Building_Application.Data.Models.Dtos.Cooler_Dtos
         public float Price { get; set; }
         public PhotoReturnDto Photo { get; set; }
         public string Manufacturer { get; set; }
-        public ICollection<SocketTypesReadDto> Sockets { get; set; }
+        public List<string> Sockets { get; set; }
     }
 }
