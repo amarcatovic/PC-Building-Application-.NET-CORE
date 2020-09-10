@@ -22,5 +22,6 @@ namespace PC_Building_Application.Data.Models
         public ICollection<Case> Cases { get; set; }
         public ICollection<Storage> Storages { get; set; }
         public ICollection<User> Users { get; set; }
+        public ICollection<Manufacturer> Manufacturers { get; set; }
     }
 }
