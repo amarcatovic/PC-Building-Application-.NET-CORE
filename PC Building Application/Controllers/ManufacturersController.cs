@@ -31,5 +31,28 @@ namespace PC_Building_Application.Controllers
 
             return Ok(manufacturerReadAllDto);
         }
+
+        [HttpGet("products/all/{id}")]
+        public async Task<IActionResult> GetManufacturerWithAllItsProductsById(int id)
+        {
+            var manufacturerFromDb = await _repo.GetManufacturerById(id);
+            if (manufacturerFromDb == null)
+                return NotFound($"Manufacturer with an id {id} was not found!");
+
+            var manufacturerReadDto = _mapper.Map<ManufacturerReadAllDto>(manufacturerFromDb);
+            return Ok(manufacturerReadDto);
+        }
+
+        [HttpGet("products/cpus/{id}")]
+        public async Task<IActionResult> GetManufacturerWithAllCPUProductsById(int id)
+        {
+            var manufacturerFromDb = await _repo.GetManufacturerById(id);
+            if (manufacturerFromDb == null)
+                return NotFound($"Manufacturer with an id {id} was not found!");
+
+            var manufacturerReadDto = _mapper.Map<ManufacturerReadCpusDto>(manufacturerFromDb);
+            return Ok(manufacturerReadDto);
+        }
+
     }
 }
