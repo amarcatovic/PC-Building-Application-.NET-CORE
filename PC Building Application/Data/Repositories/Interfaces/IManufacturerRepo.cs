@@ -1,4 +1,5 @@
 ﻿using PC_Building_Application.Data.Models;
+using PC_Building_Application.Data.Models.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,5 +19,9 @@ namespace PC_Building_Application.Data.Repositories.Interfaces
         Task<Manufacturer> GetManufacturerPowerSuppliesById(int id);
         Task<Manufacturer> GetManufacturerCasesById(int id);
         Task<Manufacturer> GetManufacturerStoragesById(int id);
+
+        Task CraeteManufacturer(Manufacturer manufacturer, PhotoToCreateDto photo);
+
+        Task<bool> Done();
     }
 }
