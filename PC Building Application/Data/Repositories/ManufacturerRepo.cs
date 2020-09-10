@@ -187,6 +187,8 @@ namespace PC_Building_Application.Data.Repositories
             var manufacturerFromDb = await _context.Manufacturers
                 .Include(m => m.Storages)
                 .ThenInclude(s => s.StorageType)
+                .Include(m => m.Storages)
+                .ThenInclude(s => s.Photo)
                 .Include(m => m.Photo)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
