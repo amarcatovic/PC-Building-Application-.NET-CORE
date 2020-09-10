@@ -12,7 +12,7 @@ namespace PC_Building_Application.Data.Models.Dtos.Manufacturer_Dtos
         public string Name { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
-
+        public PhotoReturnDto Photo { get; set; }
         public ICollection<GPUReadDto> GPUs { get; set; }
     }
 }
