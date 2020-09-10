@@ -12,6 +12,7 @@ namespace PC_Building_Application.Profiles
     {
         public ManufacturerProfiles()
         {
+            CreateMap<Manufacturer, ManufacturerReadDto>();
             CreateMap<Manufacturer, ManufacturerReadAllDto>();
             CreateMap<Manufacturer, ManufacturerReadAllCasesDto>();
             CreateMap<Manufacturer, ManufacturerReadAllCoolersDto>();
