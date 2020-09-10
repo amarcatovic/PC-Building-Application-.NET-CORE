@@ -58,6 +58,7 @@ namespace PC_Building_Application
             services.AddScoped<ICPURepo, CPURepo>();
             services.AddScoped<IRAMRepo, RAMRepo>();
             services.AddScoped<IGPURepo, GPURepo>();
+            services.AddScoped<IPowerSupplyRepo, PowerSupplyRepo>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(opt =>
