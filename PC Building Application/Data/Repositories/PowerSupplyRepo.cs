@@ -21,11 +21,11 @@ namespace PC_Building_Application.Data.Repositories
         }
         public async Task CreatePowerSupply(PowerSupply powerSupply, PhotoToCreateDto photo)
         {
-            var createdPowerSupply = await _photoRepo.AddPhotoForComponent(photo);
-            if (createdPowerSupply == null)
+            var createdPhoto = await _photoRepo.AddPhotoForComponent(photo);
+            if (createdPhoto == null)
                 return;
 
-            powerSupply.PhotoId = powerSupply.Id;
+            powerSupply.PhotoId = createdPhoto.Id;
             await _context.PowerSupplies.AddAsync(powerSupply);
         }
 
