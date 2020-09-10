@@ -21,6 +21,7 @@ using PC_Building_Application.Helper;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.IO;
+using PC_Building_Application.Data.Models;
 
 namespace PC_Building_Application
 {
@@ -61,6 +62,7 @@ namespace PC_Building_Application
             services.AddScoped<IPowerSupplyRepo, PowerSupplyRepo>();
             services.AddScoped<ICaseRepo, CaseRepo>();
             services.AddScoped<IStorageRepo, StorageRepo>();
+            services.AddScoped<ICoolerRepo, CoolerRepo>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(opt =>
