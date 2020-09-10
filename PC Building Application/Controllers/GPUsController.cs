@@ -56,7 +56,7 @@ namespace PC_Building_Application.Controllers
         /// </remarks>
         /// <response code="200">Returns single gpu info if okay</response>
         /// <response code="404">If something goes wrong</response> 
-        [HttpGet("{id}", Name = "GetCPUById")]
+        [HttpGet("{id}", Name = "GetGPUById")]
         public async Task<IActionResult> GetGPUById(int id)
         {
             var gpuFromDb = await _repo.GetGPUById(id);
@@ -86,7 +86,7 @@ namespace PC_Building_Application.Controllers
         ///         HasVGA                  false,
         ///         HasDVI                  true,
         ///         PhotoFile:              type: File,
-        ///         PhotoDescription:       "Awesome New CPU"
+        ///         PhotoDescription:       "Awesome New GPU"
         ///
         /// </remarks>
         /// <response code="201">Returns gpu info if okay</response>
