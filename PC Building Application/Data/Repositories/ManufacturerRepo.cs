@@ -66,6 +66,103 @@ namespace PC_Building_Application.Data.Repositories
             return manufacturersFromDb;
         }
 
+        public async Task<IEnumerable<Manufacturer>> GetManufacturerCases()
+        {
+            var manufacturersFromDb = await _context.Manufacturers
+                .Include(m => m.Cases)
+                .ThenInclude(c => c.Photo)
+                .Include(m => m.Photo)
+                .ToListAsync();
+
+            return manufacturersFromDb;
+        }
+
+        public async Task<IEnumerable<Manufacturer>> GetManufacturerCoolers()
+        {
+            var manufacturersFromDb = await _context.Manufacturers
+                .Include(m => m.Coolers)
+                .ThenInclude(c => c.CoolerSocketTypes)
+                .ThenInclude(cst => cst.SocketType)
+                .Include(m => m.Coolers)
+                .ThenInclude(c => c.Photo)
+                .Include(m => m.Photo)
+                .ToListAsync();
+
+            return manufacturersFromDb;
+        }
+
+        public async Task<IEnumerable<Manufacturer>> GetManufacturerCpus()
+        {
+            var manufacturersFromDb = await _context.Manufacturers
+                .Include(m => m.CPUs)
+                .ThenInclude(cpu => cpu.SocketType)
+                .Include(m => m.CPUs)
+                .ThenInclude(cpu => cpu.Photo)
+                .Include(m => m.Photo)
+                .ToListAsync();
+
+            return manufacturersFromDb;
+        }
+
+        public async Task<IEnumerable<Manufacturer>> GetManufacturerGpus()
+        {
+            var manufacturersFromDb = await _context.Manufacturers
+                .Include(m => m.GPUs)
+                .ThenInclude(gpu => gpu.Photo)
+                .Include(m => m.Photo)
+                .ToListAsync();
+
+            return manufacturersFromDb;
+        }
+
+        public async Task<IEnumerable<Manufacturer>> GetManufacturerMotherboards()
+        {
+            var manufacturersFromDb = await _context.Manufacturers
+                .Include(m => m.Motherboards)
+                .ThenInclude(mobo => mobo.SocketType)
+                .Include(m => m.Motherboards)
+                .ThenInclude(mobo => mobo.Photo)
+                .Include(m => m.Photo)
+                .ToListAsync();
+
+            return manufacturersFromDb;
+        }
+
+        public async Task<IEnumerable<Manufacturer>> GetManufacturerPowerSupplies()
+        {
+            var manufacturersFromDb = await _context.Manufacturers
+                .Include(m => m.PowerSupplies)
+                .ThenInclude(psu => psu.Photo)
+                .Include(m => m.Photo)
+                .ToListAsync();
+
+            return manufacturersFromDb;
+        }
+
+        public async Task<IEnumerable<Manufacturer>> GetManufacturerRams()
+        {
+            var manufacturersFromDb = await _context.Manufacturers
+                .Include(m => m.RAMs)
+                .ThenInclude(ram => ram.Photo)
+                .Include(m => m.Photo)
+                .ToListAsync();
+
+            return manufacturersFromDb;
+        }
+
+        public async Task<IEnumerable<Manufacturer>> GetManufacturerStorages()
+        {
+            var manufacturersFromDb = await _context.Manufacturers
+                .Include(m => m.Storages)
+                .ThenInclude(s => s.StorageType)
+                .Include(m => m.Storages)
+                .ThenInclude(s => s.Photo)
+                .Include(m => m.Photo)
+                .ToListAsync();
+
+            return manufacturersFromDb;
+        }
+
         public async Task<Manufacturer> GetManufacturerById(int id)
         {
             var manufacturerFromDb = await _context.Manufacturers
@@ -189,6 +286,24 @@ namespace PC_Building_Application.Data.Repositories
                 .ThenInclude(s => s.StorageType)
                 .Include(m => m.Storages)
                 .ThenInclude(s => s.Photo)
+                .Include(m => m.Photo)
+                .SingleOrDefaultAsync(m => m.Id == id);
+
+            return manufacturerFromDb;
+        }
+
+        public async Task<IEnumerable<Manufacturer>> GetAllManufacturersLight()
+        {
+            var manufacturersFromDb = await _context.Manufacturers
+                .Include(m => m.Photo)
+                .ToListAsync();
+
+            return manufacturersFromDb;
+        }
+
+        public async Task<Manufacturer> GetManufacturerByIdLight(int id)
+        {
+            var manufacturerFromDb = await _context.Manufacturers
                 .Include(m => m.Photo)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
