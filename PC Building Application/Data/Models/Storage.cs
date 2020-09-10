@@ -15,6 +15,7 @@ namespace PC_Building_Application.Data
         public StorageType StorageType { get; set; }
         public int StorageTypeId { get; set; }
         public bool HasCooling { get; set; }
+        public float Price { get; set; }
         public Photo Photo { get; set; }
         public int PhotoId { get; set; }
         public Manufacturer Manufacturer { get; set; }
