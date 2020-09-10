@@ -13,6 +13,15 @@ namespace PC_Building_Application.Profiles
         public ManufacturerProfiles()
         {
             CreateMap<Manufacturer, ManufacturerReadAllDto>();
+            CreateMap<Manufacturer, ManufacturerReadAllCasesDto>();
+            CreateMap<Manufacturer, ManufacturerReadAllCoolersDto>();
+            CreateMap<Manufacturer, ManufacturerReadAllGpusDto>();
+            CreateMap<Manufacturer, ManufacturerReadAllMotherboardsDto>();
+            CreateMap<Manufacturer, ManufacturerReadAllPowerSuppliesDto>();
+            CreateMap<Manufacturer, ManufacturerReadAllRamsDto>();
+            CreateMap<Manufacturer, ManufacturerReadAllStoragesDto>();
+            CreateMap<Manufacturer, ManufacturerReadCpusDto>();
+            CreateMap<ManufacturerCreateDto, Manufacturer>();
         }
     }
 }
