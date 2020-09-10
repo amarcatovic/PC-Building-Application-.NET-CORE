@@ -20,5 +20,7 @@ namespace PC_Building_Application.Data.Models
         public ICollection<PowerSupply> PowerSupplies { get; set; }
         public ICollection<Case> Cases { get; set; }
         public ICollection<Storage> Storages { get; set; }
+        public Photo Photo { get; set; }
+        public int PhotoId { get; set; }
     }
 }
