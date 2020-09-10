@@ -64,6 +64,7 @@ namespace PC_Building_Application
             services.AddScoped<IStorageRepo, StorageRepo>();
             services.AddScoped<ICoolerRepo, CoolerRepo>();
             services.AddScoped<ICoolerSocketTypeRepo, CoolerSocketTypeRepo>();
+            services.AddScoped<IManufacturerRepo, ManufacturerRepo>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(opt =>
