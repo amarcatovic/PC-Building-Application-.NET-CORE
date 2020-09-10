@@ -71,6 +71,8 @@ namespace PC_Building_Application.Data.Repositories
             var manufacturerFromDb = await _context.Manufacturers
                 .Include(m => m.CPUs)
                 .ThenInclude(cpu => cpu.Photo)
+                .Include(m => m.CPUs)
+                .ThenInclude(cpu => cpu.SocketType)
                 .Include(m => m.GPUs)
                 .ThenInclude(gpu => gpu.Photo)
                 .Include(m => m.Coolers)
