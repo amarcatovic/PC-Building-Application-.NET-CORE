@@ -12,5 +12,6 @@ namespace PC_Building_Application.Data
         public int PCId { get; set; }
         public Storage Storage { get; set; }
         public int StorageId { get; set; }
+        public DateTime Inserted { get; set; }
     }
 }

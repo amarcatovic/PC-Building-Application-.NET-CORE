@@ -11,5 +11,6 @@ namespace PC_Building_Application.Data.Models.Join_Classes
         public int PCId { get; set; }
         public RAM RAM { get; set; }
         public int RAMId { get; set; }
+        public DateTime Inserted { get; set; }
     }
 }
