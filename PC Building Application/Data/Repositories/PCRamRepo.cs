@@ -19,14 +19,14 @@ namespace PC_Building_Application.Data.Repositories
 
         public async Task AddRam(int pcId, int ramId)
         {
-            await _context.PCRAM.AddAsync(new PCRAM() { PCId = pcId, RAMId = ramId });
+            await _context.PCRAM.AddAsync(new PCRAM() { PCId = pcId, RAMId = ramId, Inserted = DateTime.Now });
         }
 
         public async Task<bool> InsertRAMIntoPC(int pcId, IEnumerable<int> ramIds)
         {
             foreach (var ramId in ramIds)
             {
-                await _context.PCRAM.AddAsync(new PCRAM() { RAMId = ramId, PCId = pcId });
+                await _context.PCRAM.AddAsync(new PCRAM() { RAMId = ramId, PCId = pcId, Inserted = DateTime.Now });
             }
 
             if ((await _context.SaveChangesAsync()) >= 0)
@@ -38,7 +38,7 @@ namespace PC_Building_Application.Data.Repositories
         public async Task RemoveRam(int pcId, int ramId)
         {
             var pcRamFromDb = await _context.PCRAM
-                .SingleOrDefaultAsync(pcs => pcs.RAMId == ramId && pcs.PCId == pcId);
+                .FirstOrDefaultAsync(pcs => pcs.RAMId == ramId && pcs.PCId == pcId);
 
             _context.PCRAM.Remove(pcRamFromDb);
         }

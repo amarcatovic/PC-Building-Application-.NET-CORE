@@ -18,14 +18,14 @@ namespace PC_Building_Application.Data.Repositories
 
         public async Task AddStorage(int pcId, int storageId)
         {
-            await _context.PCStorage.AddAsync(new PCStorage() { PCId = pcId, StorageId = storageId});
+            await _context.PCStorage.AddAsync(new PCStorage() { PCId = pcId, StorageId = storageId, Inserted = DateTime.Now });
         }
 
         public async Task<bool> InsertStorageInPC(int pcId, IEnumerable<int> storageIds)
         {
             foreach (var storageId in storageIds)
             {
-                await _context.PCStorage.AddAsync(new PCStorage() { StorageId = storageId, PCId = pcId });
+                await _context.PCStorage.AddAsync(new PCStorage() { StorageId = storageId, PCId = pcId, Inserted = DateTime.Now });
             }
 
             if ((await _context.SaveChangesAsync()) >= 0)
@@ -37,7 +37,7 @@ namespace PC_Building_Application.Data.Repositories
         public async Task RemoveStorage(int pcId, int storageId)
         {
             var pcStorageFromDb = await _context.PCStorage
-                .SingleOrDefaultAsync(pcs => pcs.StorageId == storageId && pcs.PCId == pcId);
+                .FirstOrDefaultAsync(pcs => pcs.StorageId == storageId && pcs.PCId == pcId);
 
             _context.PCStorage.Remove(pcStorageFromDb);
         }
