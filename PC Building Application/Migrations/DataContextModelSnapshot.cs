@@ -15,7 +15,7 @@ namespace PC_Building_Application.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityColumns()
+                .UseIdentityColumns(1, 1)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0-preview.7.20365.15");
 
@@ -24,7 +24,7 @@ namespace PC_Building_Application.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .UseIdentityColumn(1, 1);
 
                     b.Property<string>("Clockspeed")
                         .IsRequired()
@@ -76,7 +76,7 @@ namespace PC_Building_Application.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .UseIdentityColumn(1, 1);
 
                     b.Property<bool>("HasRGB")
                         .HasColumnType("bit");
@@ -120,7 +120,7 @@ namespace PC_Building_Application.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .UseIdentityColumn(1, 1);
 
                     b.Property<bool>("HasRGB")
                         .HasColumnType("bit");
@@ -161,7 +161,7 @@ namespace PC_Building_Application.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .UseIdentityColumn(1, 1);
 
                     b.Property<bool>("HasDVI")
                         .HasColumnType("bit");
@@ -250,7 +250,7 @@ namespace PC_Building_Application.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .UseIdentityColumn(1, 1);
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -283,7 +283,7 @@ namespace PC_Building_Application.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .UseIdentityColumn(1, 1);
 
                     b.Property<bool>("HasRGB")
                         .HasColumnType("bit");
@@ -341,7 +341,7 @@ namespace PC_Building_Application.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .UseIdentityColumn(1, 1);
 
                     b.Property<string>("BuildDescription")
                         .IsRequired()
@@ -399,7 +399,7 @@ namespace PC_Building_Application.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .UseIdentityColumn(1, 1);
 
                     b.Property<DateTime>("DateAdded")
                         .HasColumnType("datetime2");
@@ -427,7 +427,7 @@ namespace PC_Building_Application.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .UseIdentityColumn(1, 1);
 
                     b.Property<string>("EfficiencyRating")
                         .HasColumnType("nvarchar(max)");
@@ -481,7 +481,7 @@ namespace PC_Building_Application.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .UseIdentityColumn(1, 1);
 
                     b.Property<string>("CapacityPerStick")
                         .IsRequired()
@@ -530,7 +530,7 @@ namespace PC_Building_Application.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .UseIdentityColumn(1, 1);
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(450)");
@@ -606,7 +606,7 @@ namespace PC_Building_Application.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .UseIdentityColumn(1, 1);
 
                     b.Property<string>("Capacity")
                         .IsRequired()
@@ -650,7 +650,7 @@ namespace PC_Building_Application.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .UseIdentityColumn(1, 1);
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
