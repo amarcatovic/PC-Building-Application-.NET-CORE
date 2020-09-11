@@ -8,9 +8,14 @@ namespace PC_Building_Application.Data.Repositories.Interfaces
 {
     public interface IPCRepo
     {
-        Task CreatePCInitial(PC pc);
+        Task CreatePC(PC pc);
         Task<PC> GetPCById(int id);
-        Task<bool> CreatePCWithParts(int id, PC pc);
         Task<bool> Done();
+        Task ReplaceMotherboard(int pcId, int motherboardId);
+        Task ReplaceCpu(int pcId, int cpuId);
+        Task ReplaceGpu(int pcId, int gpuId);
+        Task ReplaceCooler(int pcId, int coolerId);
+        Task ReplacePowerSupply(int pcId, int psuId);
+        Task ReplaceCase(int pcId, int caseId);
     }
 }
