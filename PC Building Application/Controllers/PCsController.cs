@@ -39,6 +39,75 @@ namespace PC_Building_Application.Controllers
             return Ok(pcReadDto);
         }
 
+        [HttpGet("build/{id}/validate")]
+        public async Task<IActionResult> ValidatePCPartsCompatibility(int id)
+        {
+            var validationErrors = new List<string>();
+
+            var pcFromDb = await _repo.GetPCById(id);
+
+            var rams = pcFromDb.PCRAMs.Select(pcram => pcram.RAM);
+            var storages = pcFromDb.PCStorages.Select(pcs => pcs.Storage);
+
+            //--------------------------------------------------------------------------------------------------------------------
+            //                                       MOTHERBOARD CHECKS
+            //--------------------------------------------------------------------------------------------------------------------
+            var moboCPUCheck = pcFromDb.Motherboard.CheckMotherboardAndCpuCompatibility(pcFromDb.CPU);
+            if(moboCPUCheck.Count > 0)
+            {
+                foreach (var error in moboCPUCheck)
+                    validationErrors.Add(error);
+            }
+
+            var moboRAMCheck = pcFromDb.Motherboard.CheckMotherboardAndRamsCompatibility(rams);
+            if (moboRAMCheck.Count > 0)
+            {
+                foreach (var error in moboRAMCheck)
+                    validationErrors.Add(error);
+            }
+
+            var moboCoolerCheck = pcFromDb.Motherboard.CheckMotherboardAndCoolerCompatibility(pcFromDb.Cooler);
+            if (moboCoolerCheck.Count > 0)
+            {
+                foreach (var error in moboCoolerCheck)
+                    validationErrors.Add(error);
+            }
+
+            var moboStorageCheck = pcFromDb.Motherboard.CheckMotherboardAndStorageCompatibility(storages);
+            if (moboStorageCheck.Count > 0)
+            {
+                foreach (var error in moboStorageCheck)
+                    validationErrors.Add(error);
+            }
+
+            //--------------------------------------------------------------------------------------------------------------------
+            //                                                       GPU CHECKS
+            //--------------------------------------------------------------------------------------------------------------------
+            var gpuPowerSupplyCheck = pcFromDb.GPU.CheckGpuAndPowerSupplyCompatibility(pcFromDb.PowerSupply);
+            if (gpuPowerSupplyCheck.Count > 0)
+            {
+                foreach (var error in gpuPowerSupplyCheck)
+                    validationErrors.Add(error);
+            }
+
+            //--------------------------------------------------------------------------------------------------------------------
+            //                                                       PSU CHECKS
+            //--------------------------------------------------------------------------------------------------------------------
+            var psuSataStorageCheck = pcFromDb.PowerSupply.CheckPsuAndStoragesompatibility(storages);
+            if (psuSataStorageCheck.Count > 0)
+            {
+                foreach (var error in psuSataStorageCheck)
+                    validationErrors.Add(error);
+            }
+
+
+
+            if (validationErrors.Count > 0)
+                return Ok(validationErrors);
+
+            return NoContent();
+        }
+
         [HttpPost("build/create")]
         public async Task<IActionResult> CreatePC(PCCreateDto pCCreateDto)
         {

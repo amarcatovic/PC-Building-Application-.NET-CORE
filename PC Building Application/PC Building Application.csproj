@@ -37,6 +37,8 @@
     <Compile Remove="Migrations\20200910155831_AddPhotoToManufacturer.Designer.cs" />
     <Compile Remove="Migrations\20200910160019_AddPhotoIdToManufacturer.cs" />
     <Compile Remove="Migrations\20200910160019_AddPhotoIdToManufacturer.Designer.cs" />
+    <Compile Remove="Migrations\20200911163246_Test.cs" />
+    <Compile Remove="Migrations\20200911163246_Test.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
