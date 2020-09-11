@@ -12,7 +12,7 @@ namespace PC_Building_Application.Data
     {
         public void Configure(EntityTypeBuilder<PCRAM> builder)
         {
-            builder.HasKey(pcram => new { pcram.PCId, pcram.RAMId });
+            builder.HasKey(pcram => new { pcram.PCId, pcram.RAMId, pcram.Inserted });
 
             builder.HasOne(pcram => pcram.RAM)
                 .WithMany(ram => ram.PCRAMs)

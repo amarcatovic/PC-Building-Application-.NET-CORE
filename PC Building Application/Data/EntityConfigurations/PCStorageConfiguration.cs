@@ -11,7 +11,7 @@ namespace PC_Building_Application.Data.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<PCStorage> builder)
         {
-            builder.HasKey(ps => new { ps.StorageId, ps.PCId });
+            builder.HasKey(ps => new { ps.StorageId, ps.PCId, ps.Inserted });
 
             builder.HasOne(ps => ps.PC)
                 .WithMany(pc => pc.PCStorages)
