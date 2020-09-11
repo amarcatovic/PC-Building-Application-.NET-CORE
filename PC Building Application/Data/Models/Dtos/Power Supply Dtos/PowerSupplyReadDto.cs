@@ -13,6 +13,7 @@ namespace PC_Building_Application.Data.Models.Dtos.Power_Supply_Dtos
         public string Power { get; set; }
         public byte NoOfPCIe6Pins { get; set; }
         public byte NoOfPCIe8Pins { get; set; }
+        public byte NoOfPCIe12Pins { get; set; }
         public byte NoOfSATACables { get; set; }
         public byte NoOfCPUCables { get; set; }
         public bool Has24PinCable { get; set; }
