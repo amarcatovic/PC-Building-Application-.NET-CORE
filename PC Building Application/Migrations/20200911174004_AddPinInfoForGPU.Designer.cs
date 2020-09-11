@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PC_Building_Application.Data;
 
 namespace PC_Building_Application.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200911174004_AddPinInfoForGPU")]
+    partial class AddPinInfoForGPU
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -452,9 +454,6 @@ namespace PC_Building_Application.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte>("NoOfCPUCables")
-                        .HasColumnType("tinyint");
-
-                    b.Property<byte>("NoOfPCIe12Pins")
                         .HasColumnType("tinyint");
 
                     b.Property<byte>("NoOfPCIe6Pins")
