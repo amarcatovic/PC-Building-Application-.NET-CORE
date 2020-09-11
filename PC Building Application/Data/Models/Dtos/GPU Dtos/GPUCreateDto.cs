@@ -18,6 +18,9 @@ namespace PC_Building_Application.Data.Models.Dtos.GPU_Dtos
         public bool HasVGA { get; set; }
         public bool HasDVI { get; set; }
         public float Price { get; set; }
+        public byte NoOfPCIe6Pins { get; set; }
+        public byte NoOfPCIe8Pins { get; set; }
+        public byte NoOfPCIe12Pins { get; set; }
         public int PhotoId { get; set; }
         public int ManufacturerId { get; set; }
         public string PhotoDescription { get; set; }
