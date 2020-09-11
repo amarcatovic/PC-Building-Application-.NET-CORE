@@ -10,6 +10,7 @@ namespace PC_Building_Application.Data.Repositories.Interfaces
     {
         Task CreatePCInitial(PC pc);
         Task<PC> GetPCById(int id);
-        Task<PC> CreatePCWithParts(int id, PC pc);
+        Task<bool> CreatePCWithParts(int id, PC pc);
+        Task<bool> Done();
     }
 }
