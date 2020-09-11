@@ -20,12 +20,6 @@ namespace PC_Building_Application.Data.EntityConfigurations
             builder.HasIndex(u => new { u.UserName, u.Email })
                 .IsUnique();
 
-            builder.Property(u => u.PasswordHash)
-                .IsRequired();
-
-            builder.Property(u => u.PasswordSalt)
-                .IsRequired();
-
             builder.Property(u => u.Email)
                 .IsRequired();
 
