@@ -32,7 +32,7 @@ namespace PC_Building_Application.Helper
                 (
                     new Photo() 
                     { 
-                        Url = "https://i1.sndcdn.com/avatars-000437232558-yuo0mv-t500x500.jpg",
+                        Url = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png",
                         Description = "Anonymous User Photo",
                         DateAdded = DateTime.Now,
                         PublicId = "1"
