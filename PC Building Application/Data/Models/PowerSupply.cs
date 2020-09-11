@@ -13,6 +13,7 @@ namespace PC_Building_Application.Data.Models
         public string Power { get; set; }
         public byte NoOfPCIe6Pins { get; set; }
         public byte NoOfPCIe8Pins { get; set; }
+        public byte NoOfPCIe12Pins { get; set; }
         public byte NoOfSATACables { get; set; }
         public byte NoOfCPUCables { get; set; }
         public bool Has24PinCable { get; set; }
@@ -23,5 +24,24 @@ namespace PC_Building_Application.Data.Models
         public Manufacturer Manufacturer { get; set; }
         public int ManufacturerId { get; set; }
         public ICollection<PC> PCs { get; set; }
+
+        // COMPATIBILITY CHECK METHODS
+        public List<string> CheckPsuAndStoragesompatibility(IEnumerable<Storage> storages)
+        {
+            var errorStrings = new List<string>();
+            int noOfSataCablesRequired = 0;
+            
+            foreach(var storage in storages)
+            {
+                if (storage.Name != "M.2 SSD")
+                    ++noOfSataCablesRequired;
+            }
+
+            if (this.NoOfSATACables < noOfSataCablesRequired)
+                errorStrings.Add($"There are {noOfSataCablesRequired} SATA drives, but Power supply has only {this.NoOfSATACables} SATA power cables");
+
+
+            return errorStrings;
+        }
     }
 }
