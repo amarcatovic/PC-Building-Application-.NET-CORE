@@ -191,7 +191,7 @@ namespace PC_Building_Application.Helper
             if (!context.Users.Any())
             {
                 Console.WriteLine("Adding default user to the database!");
-                context.Users.Add(new User() { UserName = "Anonymous user", Email = "anonymous@buildit.com", EmailConfirmed = true, PhotoId = 1 });
+                context.Users.Add(new User() { Id= "anonymous", UserName = "Anonymous user", Email = "anonymous@buildit.com", EmailConfirmed = true, PhotoId = 1 });
             }
             else
             {
