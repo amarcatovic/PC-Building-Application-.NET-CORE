@@ -1,4 +1,5 @@
-﻿using PC_Building_Application.Data.Repositories.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using PC_Building_Application.Data.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,12 @@ namespace PC_Building_Application.Data.Repositories
         {
             _context = context;
         }
+
+        public async Task AddStorage(int pcId, int storageId)
+        {
+            await _context.PCStorage.AddAsync(new PCStorage() { PCId = pcId, StorageId = storageId});
+        }
+
         public async Task<bool> InsertStorageInPC(int pcId, IEnumerable<int> storageIds)
         {
             foreach (var storageId in storageIds)
@@ -25,6 +32,14 @@ namespace PC_Building_Application.Data.Repositories
                 return true;
 
             return false;
+        }
+
+        public async Task RemoveStorage(int pcId, int storageId)
+        {
+            var pcStorageFromDb = await _context.PCStorage
+                .SingleOrDefaultAsync(pcs => pcs.StorageId == storageId && pcs.PCId == pcId);
+
+            _context.PCStorage.Remove(pcStorageFromDb);
         }
     }
 }
