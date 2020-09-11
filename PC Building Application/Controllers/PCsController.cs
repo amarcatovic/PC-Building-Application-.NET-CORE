@@ -28,6 +28,17 @@ namespace PC_Building_Application.Controllers
             _pCStorageRepo = pCStorageRepo;
         }
 
+        /// <summary>
+        /// Returns single pc build which id matches requested id
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     GET /api/pcs/build/5
+        ///
+        /// </remarks>
+        /// <response code="200">Returns single pc build info if okay</response>
+        /// <response code="404">If something goes wrong</response> 
         [HttpGet("build/{id}", Name = "GetPCById")]
         public async Task<IActionResult> GetPCById(int id)
         {
@@ -39,6 +50,17 @@ namespace PC_Building_Application.Controllers
             return Ok(pcReadDto);
         }
 
+        /// <summary>
+        /// Checks if all pc parts are compatible
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     GET /api/pcs/build/5/validate
+        ///
+        /// </remarks>
+        /// <response code="204">Returns no content if all pc parts are compatible with other pc parts</response>
+        /// <response code="200">Returns list of error messages if there are some incompatible parts</response> 
         [HttpGet("build/{id}/validate")]
         public async Task<IActionResult> ValidatePCPartsCompatibility(int id)
         {
@@ -108,7 +130,31 @@ namespace PC_Building_Application.Controllers
             return NoContent();
         }
 
-        [HttpPost("build/create")]
+        /// <summary>
+        /// Creates pc build from json
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /api/pcs/build/create
+        ///     {
+        ///         "buildTitle": "Demo Build",
+        ///         "buildDescription": "This is swagger build",
+        ///         "motherboardId": 25,
+        ///         "cpuId": 12,
+        ///         "gpuId": 16,
+        ///         "coolerId": 19,
+        ///         "powerSupplyId": 23,
+        ///         "caseId": 61,
+        ///         "ramIds": [60, 60],
+        ///         "storageIds": [51, 19, 67, 10],
+        ///         "userId": "anonymous"  -> IF BUILD IS FROM GUEST USER, ELSE USE userId FROM LOGED USER
+        ///     }
+    ///
+    /// </remarks>
+    /// <response code="201">Returns pc build info if okay</response>
+    /// <response code="400">If something goes wrong</response>  
+    [HttpPost("build/create")]
         public async Task<IActionResult> CreatePC(PCCreateDto pCCreateDto)
         {
             var pc = _mapper.Map<PC>(pCCreateDto);
@@ -126,6 +172,16 @@ namespace PC_Building_Application.Controllers
             return BadRequest("There was an error with saving new PC build to the database. Please review inputs and try again");
         }
 
+        /// <summary>
+        /// Replaces case in PC build
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /api/pcs/build/{id}/replace/case/{caseId}
+        ///
+        /// </remarks>
+        /// <response code="204">Returns no content if okay</response> 
         [HttpPut("build/{id}/replace/case/{caseId}")]
         public async Task<IActionResult> ReplacePcCase(int id, int caseId)
         {
@@ -136,6 +192,16 @@ namespace PC_Building_Application.Controllers
             return BadRequest("There was an error with replacing case, review the data and try again");
         }
 
+        /// <summary>
+        /// Replaces cooler in PC build
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /api/pcs/build/{id}/replace/cooler/{coolerId}
+        ///
+        /// </remarks>
+        /// <response code="204">Returns no content if okay</response> 
         [HttpPut("build/{id}/replace/cooler/{coolerId}")]
         public async Task<IActionResult> ReplacePcCooler(int id, int coolerId)
         {
@@ -146,6 +212,16 @@ namespace PC_Building_Application.Controllers
             return BadRequest("There was an error with replacing cooler, review the data and try again");
         }
 
+        /// <summary>
+        /// Replaces CPU in PC build
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /api/pcs/build/{id}/replace/cpu/{cpuId}
+        ///
+        /// </remarks>
+        /// <response code="204">Returns no content if okay</response> 
         [HttpPut("build/{id}/replace/cpu/{cpuId}")]
         public async Task<IActionResult> ReplacePcCpu(int id, int cpuId)
         {
@@ -156,6 +232,16 @@ namespace PC_Building_Application.Controllers
             return BadRequest("There was an error with replacing cpu, review the data and try again");
         }
 
+        /// <summary>
+        /// Replaces GPU in PC build
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /api/pcs/build/{id}/replace/gpu/{gpuId}
+        ///
+        /// </remarks>
+        /// <response code="204">Returns no content if okay</response> 
         [HttpPut("build/{id}/replace/gpu/{gpuId}")]
         public async Task<IActionResult> ReplacePcGpu(int id, int gpuId)
         {
@@ -166,6 +252,16 @@ namespace PC_Building_Application.Controllers
             return BadRequest("There was an error with replacing gpu, review the data and try again");
         }
 
+        /// <summary>
+        /// Replaces Motherboard in PC build
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /api/pcs/build/{id}/replace/motherboard/{motherboardId}
+        ///
+        /// </remarks>
+        /// <response code="204">Returns no content if okay</response> 
         [HttpPut("build/{id}/replace/motherboard/{motherboardId}")]
         public async Task<IActionResult> ReplacePcMotherboard(int id, int motherboardId)
         {
@@ -176,6 +272,16 @@ namespace PC_Building_Application.Controllers
             return BadRequest("There was an error with replacing motherboard, review the data and try again");
         }
 
+        /// <summary>
+        /// Replaces Power Supply in PC build
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /api/pcs/build/{id}/replace/psu/{psuId}
+        ///
+        /// </remarks>
+        /// <response code="204">Returns no content if okay</response> 
         [HttpPut("build/{id}/replace/psu/{psuId}")]
         public async Task<IActionResult> ReplacePcPowerSupply(int id, int psuId)
         {
@@ -186,6 +292,16 @@ namespace PC_Building_Application.Controllers
             return BadRequest("There was an error with replacing Power Supply, review the data and try again");
         }
 
+        /// <summary>
+        /// Removes single RAM stick (or RAM package) in PC build
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /api/pcs/build/{id}/remove/ram/{ramId}
+        ///
+        /// </remarks>
+        /// <response code="204">Returns no content if okay</response> 
         [HttpPut("build/{id}/remove/ram/{ramId}")]
         public async Task<IActionResult> RemovePcRam(int id, int ramId)
         {
@@ -196,6 +312,16 @@ namespace PC_Building_Application.Controllers
             return BadRequest("There was an error with removing RAM, review the data and try again");
         }
 
+        /// <summary>
+        /// Adds single RAM stick (or RAM package) in PC build
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /api/pcs/build/{id}/add/ram/{ramId}
+        ///
+        /// </remarks>
+        /// <response code="204">Returns no content if okay</response> 
         [HttpPut("build/{id}/add/ram/{ramId}")]
         public async Task<IActionResult> AddPcRam(int id, int ramId)
         {
@@ -206,6 +332,16 @@ namespace PC_Building_Application.Controllers
             return BadRequest("There was an error with adding RAM, review the data and try again");
         }
 
+        /// <summary>
+        /// Removes single Storage Drive in PC build
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /api/pcs/build/{id}/remove/storage/{storageId}
+        ///
+        /// </remarks>
+        /// <response code="204">Returns no content if okay</response> 
         [HttpPut("build/{id}/remove/storage/{storageId}")]
         public async Task<IActionResult> RemovePcStorage(int id, int storageId)
         {
@@ -216,6 +352,16 @@ namespace PC_Building_Application.Controllers
             return BadRequest("There was an error with removing Storage, review the data and try again");
         }
 
+        /// <summary>
+        /// Adds single Storage Drive in PC build
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /api/pcs/build/{id}/add/storage/{storageId}
+        ///
+        /// </remarks>
+        /// <response code="204">Returns no content if okay</response> 
         [HttpPut("build/{id}/add/storage/{storageId}")]
         public async Task<IActionResult> AddPcStorage(int id, int storageId)
         {
