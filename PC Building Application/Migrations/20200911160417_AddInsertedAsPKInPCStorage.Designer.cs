@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PC_Building_Application.Data;
 
 namespace PC_Building_Application.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200911160417_AddInsertedAsPKInPCStorage")]
+    partial class AddInsertedAsPKInPCStorage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -238,7 +240,7 @@ namespace PC_Building_Application.Migrations
                     b.Property<DateTime>("Inserted")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("PCId", "RAMId", "Inserted");
+                    b.HasKey("PCId", "RAMId");
 
                     b.HasIndex("RAMId");
 
