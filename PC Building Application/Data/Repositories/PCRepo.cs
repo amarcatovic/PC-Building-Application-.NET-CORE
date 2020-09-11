@@ -15,29 +15,9 @@ namespace PC_Building_Application.Data.Repositories
         {
             _context = context;
         }
-        public async Task CreatePCInitial(PC pc)
+        public async Task CreatePC(PC pc)
         {
             await _context.PCs.AddAsync(pc);
-        }
-
-        public async Task<bool> CreatePCWithParts(int id, PC pc)
-        {
-            var pcFromDb = _context.PCs.SingleOrDefault(pc => pc.Id == id);
-            if (pcFromDb == null)
-                return false;
-
-            pcFromDb.BuildTitle = pc.BuildTitle;
-            pcFromDb.BuildDescription = pc.BuildDescription;
-            pcFromDb.MotherboardId = pc.MotherboardId;
-            pcFromDb.CPUId = pc.CPUId;
-            pcFromDb.GPUId = pc.GPUId;
-            pcFromDb.CoolerId = pc.CoolerId;
-            pcFromDb.PowerSupplyId = pc.PowerSupplyId;
-            pcFromDb.CaseId = pc.CaseId;
-
-            await _context.SaveChangesAsync();
-
-            return true;
         }
 
         public async Task<bool> Done()
@@ -60,6 +40,10 @@ namespace PC_Building_Application.Data.Repositories
                 .ThenInclude(cpu => cpu.SocketType)
                 .Include(pc => pc.CPU)
                 .ThenInclude(cpu => cpu.Manufacturer)
+                .Include(pc => pc.GPU)
+                .ThenInclude(cpu => cpu.Photo)
+                .Include(pc => pc.GPU)
+                .ThenInclude(cpu => cpu.Manufacturer)
                 .Include(pc => pc.Cooler)
                 .ThenInclude(c => c.Photo)
                 .Include(pc => pc.Cooler)
@@ -77,11 +61,54 @@ namespace PC_Building_Application.Data.Repositories
                 .ThenInclude(c => c.Manufacturer)
                 .Include(pc => pc.PCRAMs)
                 .ThenInclude(pcram => pcram.RAM)
+                .ThenInclude(ram => ram.Photo)
                 .Include(pc => pc.PCStorages)
                 .ThenInclude(pcs => pcs.Storage)
+                .ThenInclude(s => s.Photo)
+                .Include(pc => pc.PCStorages)
+                .ThenInclude(pcs => pcs.Storage)
+                .ThenInclude(s => s.StorageType)
+                .Include(pc => pc.User)
+                .ThenInclude(u => u.Photo)
                 .SingleOrDefaultAsync(cpu => cpu.Id == id);
 
             return pcFromDb;
+        }
+
+        public async Task ReplaceCase(int pcId, int caseId)
+        {
+            var pcFromDb = await _context.PCs.SingleOrDefaultAsync(pc => pc.Id == pcId);
+            pcFromDb.CaseId = caseId;
+        }
+
+        public async Task ReplaceCooler(int pcId, int coolerId)
+        {
+            var pcFromDb = await _context.PCs.SingleOrDefaultAsync(pc => pc.Id == pcId);
+            pcFromDb.CoolerId = coolerId;
+        }
+
+        public async Task ReplaceCpu(int pcId, int cpuId)
+        {
+            var pcFromDb = await _context.PCs.SingleOrDefaultAsync(pc => pc.Id == pcId);
+            pcFromDb.CPUId = cpuId;
+        }
+
+        public async Task ReplaceGpu(int pcId, int gpuId)
+        {
+            var pcFromDb = await _context.PCs.SingleOrDefaultAsync(pc => pc.Id == pcId);
+            pcFromDb.GPUId = gpuId;
+        }
+
+        public async Task ReplaceMotherboard(int pcId, int motherboardId)
+        {
+            var pcFromDb = await _context.PCs.SingleOrDefaultAsync(pc => pc.Id == pcId);
+            pcFromDb.MotherboardId = motherboardId;
+        }
+
+        public async Task ReplacePowerSupply(int pcId, int psuId)
+        {
+            var pcFromDb = await _context.PCs.SingleOrDefaultAsync(pc => pc.Id == pcId);
+            pcFromDb.PowerSupplyId = psuId;
         }
     }
 }
