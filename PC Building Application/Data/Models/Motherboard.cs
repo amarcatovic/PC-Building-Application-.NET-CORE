@@ -64,5 +64,43 @@ namespace PC_Building_Application.Data.Models
 
             return errorStrings;
         }
+
+        public List<string> CheckMotherboardAndCoolerCompatibility(Cooler cooler)
+        {
+            var errorStrings = new List<string>();
+            bool socketTypeMatch = false;
+
+            var coolerSockets = cooler.CoolerSocketTypes.Select(cst => cst.SocketType);
+            foreach(var socket in coolerSockets)
+            {
+                if (socket.Name == this.SocketType.Name)
+                {
+                    socketTypeMatch = true;
+                    break;
+                }
+            }
+
+            if (!socketTypeMatch)
+                errorStrings.Add($"Cooler is not designed for {this.SocketType.Name} socket, so it will not fit.");
+
+            return errorStrings;
+        }
+
+        public List<string> CheckMotherboardAndStorageCompatibility(IEnumerable<Storage> storages)
+        {
+            var errorStrings = new List<string>();
+            int noOfMoboM2Slots = 0;
+
+            foreach(var storage in storages)
+            {
+                if (storage.StorageType.Name == "M.2 SSD")
+                    ++noOfMoboM2Slots;
+            }
+
+            if (noOfMoboM2Slots > this.NoOfM2Slots)
+                errorStrings.Add($"Motherboard has {this.NoOfM2Slots} M.2 Slots, but this PC build includes {noOfMoboM2Slots} M.2 SSDs");
+
+            return errorStrings;
+        }
     }
 }
