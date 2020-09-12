@@ -19,13 +19,15 @@ namespace PC_Building_Application.Controllers
         private readonly IPCRepo _repo;
         private readonly IPCRamRepo _pCRamRepo;
         private readonly IPCStorageRepo _pCStorageRepo;
+        private readonly IPCGPURepo _pcGpuRepo;
 
-        public PCsController(IMapper mapper, IPCRepo repo, IPCRamRepo pCRamRepo, IPCStorageRepo pCStorageRepo)
+        public PCsController(IMapper mapper, IPCRepo repo, IPCRamRepo pCRamRepo, IPCStorageRepo pCStorageRepo, IPCGPURepo pCGPURepo)
         {
             _mapper = mapper;
             _repo = repo;
             _pCRamRepo = pCRamRepo;
             _pCStorageRepo = pCStorageRepo;
+            _pcGpuRepo = pCGPURepo;
         }
 
         /// <summary>
@@ -233,27 +235,7 @@ namespace PC_Building_Application.Controllers
                 return NoContent();
 
             return BadRequest("There was an error with replacing cpu, review the data and try again");
-        }
-
-        /// <summary>
-        /// Replaces GPU in PC build
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     PUT /api/pcs/build/{id}/replace/gpu/{gpuId}
-        ///
-        /// </remarks>
-        /// <response code="204">Returns no content if okay</response> 
-        [HttpPut("build/{id}/replace/gpu/{gpuId}")]
-        public async Task<IActionResult> ReplacePcGpu(int id, int gpuId)
-        {
-            await _repo.ReplaceGpu(id, gpuId);
-            if (await _repo.Done())
-                return NoContent();
-
-            return BadRequest("There was an error with replacing gpu, review the data and try again");
-        }
+        }     
 
         /// <summary>
         /// Replaces Motherboard in PC build
@@ -293,6 +275,46 @@ namespace PC_Building_Application.Controllers
                 return NoContent();
 
             return BadRequest("There was an error with replacing Power Supply, review the data and try again");
+        }
+
+        /// <summary>
+        /// Removes single gpu from PC build
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /api/pcs/build/{id}/remove/gpu/{gpuId}
+        ///
+        /// </remarks>
+        /// <response code="204">Returns no content if okay</response> 
+        [HttpPut("build/{id}/remove/gpu/{gpuId}")]
+        public async Task<IActionResult> RemovePcGpu(int id, int gpuId)
+        {
+            await _pcGpuRepo.RemoveGpu(id, gpuId);
+            if (await _repo.Done())
+                return NoContent();
+
+            return BadRequest("There was an error with removing GPU, review the data and try again");
+        }
+
+        /// <summary>
+        /// Adds single GPU to the PC build
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /api/pcs/build/{id}/add/gpu/{gpuId}
+        ///
+        /// </remarks>
+        /// <response code="204">Returns no content if okay</response> 
+        [HttpPut("build/{id}/add/gpu/{gpuId}")]
+        public async Task<IActionResult> AddPcGpu(int id, int gpuId)
+        {
+            await _pcGpuRepo.AddGpu(id, gpuId);
+            if (await _repo.Done())
+                return NoContent();
+
+            return BadRequest("There was an error with adding GPU, review the data and try again");
         }
 
         /// <summary>
