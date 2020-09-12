@@ -68,6 +68,7 @@ namespace PC_Building_Application
             services.AddScoped<IPCRepo, PCRepo>();
             services.AddScoped<IPCRamRepo, PCRamRepo>();
             services.AddScoped<IPCStorageRepo, PCStorageRepo>();
+            services.AddScoped<IPCGPURepo, PCGPURepo>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(opt =>
