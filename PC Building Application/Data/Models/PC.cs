@@ -18,14 +18,13 @@ namespace PC_Building_Application.Data.Models
         public int CPUId { get; set; }
         public User User { get; set; }
         public string UserId { get; set; }
-        public GPU GPU { get; set; }
-        public int GPUId { get; set; }
         public Cooler Cooler { get; set; }
         public int CoolerId { get; set; }
         public PowerSupply PowerSupply { get; set; }
         public int PowerSupplyId { get; set; }
         public Case Case { get; set; }
         public int CaseId { get; set; }
+        public ICollection<PCGPU> PCGPUs { get; set; }
         public ICollection<PCRAM> PCRAMs { get; set; }
         public ICollection<PCStorage> PCStorages { get; set; }
 
@@ -126,41 +125,46 @@ namespace PC_Building_Application.Data.Models
         public List<string> CheckGpuAndPowerSupplyCompatibility()
         {
             var errorStrings = new List<string>();
-            if (this.PowerSupply.NoOfPCIe6Pins < this.GPU.NoOfPCIe6Pins ||
-                this.PowerSupply.NoOfPCIe8Pins < this.GPU.NoOfPCIe8Pins ||
-                (this.PowerSupply.NoOfPCIe8Pins < 2 * this.GPU.NoOfPCIe12Pins && this.PowerSupply.NoOfPCIe12Pins < this.GPU.NoOfPCIe12Pins))
+            var gpus = this.PCGPUs.Select(pcgpu => pcgpu.GPU);
+
+            foreach (var gpu in gpus)
             {
-                string tempErrorString = "GPU requires (";
-                if (this.GPU.NoOfPCIe6Pins > 0)
-                    tempErrorString += this.GPU.NoOfPCIe6Pins.ToString() + ") 6 Pin Connector";
-                if (this.GPU.NoOfPCIe6Pins > 1)
-                    tempErrorString += "s";
+                if (this.PowerSupply.NoOfPCIe6Pins < gpu.NoOfPCIe6Pins ||
+                    this.PowerSupply.NoOfPCIe8Pins < gpu.NoOfPCIe8Pins ||
+                    (this.PowerSupply.NoOfPCIe8Pins < 2 * gpu.NoOfPCIe12Pins && this.PowerSupply.NoOfPCIe12Pins < gpu.NoOfPCIe12Pins))
+                {
+                    string tempErrorString = $"{gpu.Name} requires (";
+                    if (gpu.NoOfPCIe6Pins > 0)
+                        tempErrorString += $"{gpu.NoOfPCIe6Pins.ToString()}) 6 Pin Connector";
+                    if (gpu.NoOfPCIe6Pins > 1)
+                        tempErrorString += "s";
 
-                if (this.GPU.NoOfPCIe8Pins > 0)
-                    tempErrorString += ", (" + this.GPU.NoOfPCIe8Pins.ToString() + ") 8 Pin Connector";
-                if (this.GPU.NoOfPCIe8Pins > 1)
-                    tempErrorString += "s";
+                    if (gpu.NoOfPCIe8Pins > 0)
+                        tempErrorString += $", ({gpu.NoOfPCIe8Pins.ToString()}) 8 Pin Connector";
+                    if (gpu.NoOfPCIe8Pins > 1)
+                        tempErrorString += "s";
 
-                if (this.GPU.NoOfPCIe12Pins > 0)
-                    tempErrorString += " and (" + this.GPU.NoOfPCIe12Pins.ToString() + ") 12 Pin Connector";
-                if (this.GPU.NoOfPCIe12Pins > 1)
-                    tempErrorString += "s";
+                    if (gpu.NoOfPCIe12Pins > 0)
+                        tempErrorString += $" and ({ gpu.NoOfPCIe12Pins.ToString()}) 12 Pin Connector";
+                    if (gpu.NoOfPCIe12Pins > 1)
+                        tempErrorString += "s";
 
-                tempErrorString += ", but Power supply has ";
-                if (this.PowerSupply.NoOfPCIe6Pins > 0)
-                    tempErrorString += $"({this.PowerSupply.NoOfPCIe6Pins}) 6 Pin";
-                if (this.PowerSupply.NoOfPCIe8Pins > 0)
-                    tempErrorString += $", ({this.PowerSupply.NoOfPCIe8Pins}) 8 Pin";
-                if (this.PowerSupply.NoOfPCIe12Pins > 0)
-                    tempErrorString += $", ({this.PowerSupply.NoOfPCIe12Pins}) 12 Pin";
+                    tempErrorString += ", but Power supply has ";
+                    if (this.PowerSupply.NoOfPCIe6Pins > 0)
+                        tempErrorString += $"({this.PowerSupply.NoOfPCIe6Pins}) 6 Pin";
+                    if (this.PowerSupply.NoOfPCIe8Pins > 0)
+                        tempErrorString += $", ({this.PowerSupply.NoOfPCIe8Pins}) 8 Pin";
+                    if (this.PowerSupply.NoOfPCIe12Pins > 0)
+                        tempErrorString += $", ({this.PowerSupply.NoOfPCIe12Pins}) 12 Pin";
 
-                if (this.PowerSupply.NoOfPCIe6Pins == 0 && this.PowerSupply.NoOfPCIe8Pins == 0 && this.PowerSupply.NoOfPCIe12Pins == 0)
-                    tempErrorString += "no PCIe Pins";
-                else
-                    tempErrorString += " PCIe connectors";
+                    if (this.PowerSupply.NoOfPCIe6Pins == 0 && this.PowerSupply.NoOfPCIe8Pins == 0 && this.PowerSupply.NoOfPCIe12Pins == 0)
+                        tempErrorString += "no PCIe Pins";
+                    else
+                        tempErrorString += " PCIe connectors";
 
 
-                errorStrings.Add(tempErrorString);
+                    errorStrings.Add(tempErrorString);
+                }
             }
 
             return errorStrings;
