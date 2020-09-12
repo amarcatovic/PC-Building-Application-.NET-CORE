@@ -157,6 +157,9 @@ namespace PC_Building_Application.Controllers
     [HttpPost("build/create")]
         public async Task<IActionResult> CreatePC(PCCreateDto pCCreateDto)
         {
+            if (pCCreateDto.ramIds.Count == 0 || pCCreateDto.storageIds.Count == 0)
+                return BadRequest("You need to include at least one RAM Stick or package and One Storage device");
+
             var pc = _mapper.Map<PC>(pCCreateDto);
             await _repo.CreatePC(pc);
 
