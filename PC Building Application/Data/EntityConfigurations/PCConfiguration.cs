@@ -38,11 +38,6 @@ namespace PC_Building_Application.Data.EntityConfigurations
                 .HasForeignKey(pc => pc.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(pc => pc.GPU)
-                .WithMany(gpu => gpu.PCs)
-                .HasForeignKey(pc => pc.GPUId)
-                .OnDelete(DeleteBehavior.Restrict);
-
             builder.HasOne(pc => pc.Cooler)
                 .WithMany(c => c.PCs)
                 .HasForeignKey(pc => pc.CoolerId)
