@@ -28,5 +28,142 @@ namespace PC_Building_Application.Data.Models
         public int CaseId { get; set; }
         public ICollection<PCRAM> PCRAMs { get; set; }
         public ICollection<PCStorage> PCStorages { get; set; }
+
+
+        //PC PART COMPATIBILITY CHECH METHODS
+
+        public List<string> CheckMotherboardAndCpuCompatibility()
+        {
+            var errorStrings = new List<string>();
+            if (this.Motherboard.SocketType.Name != this.CPU.SocketType.Name)
+                errorStrings.Add($"CPU's socket {this.CPU.SocketType.Name} cannot fit onto motherboards socket {this.Motherboard.SocketType.Name}");
+
+            return errorStrings;
+        }
+
+        public List<string> CheckMotherboardAndRamsCompatibility()
+        {
+            var errorStrings = new List<string>();
+            int noOfRamSticks = 0;
+            bool compatibleMemoryType = true;
+            string ramName = "";
+
+            foreach (var ram in this.PCRAMs.Select(pcram => pcram.RAM))
+            {
+                noOfRamSticks += ram.NoOfSticks;
+                if (ram.Type != this.Motherboard.MemoryType)
+                {
+                    compatibleMemoryType = false;
+                    ramName = ram.Name;
+                }
+            }
+
+            if (noOfRamSticks > this.Motherboard.NoOfRAMSlots)
+                errorStrings.Add($"Motherboard has {this.Motherboard.NoOfRAMSlots} slots for RAM, but there are {noOfRamSticks} included in PC build");
+
+            if (!compatibleMemoryType)
+                errorStrings.Add($"{ramName} and motherboard are incompatible. Please pick {this.Motherboard.MemoryType} RAM");
+
+            return errorStrings;
+        }
+
+        public List<string> CheckMotherboardAndCoolerCompatibility()
+        {
+            var errorStrings = new List<string>();
+            bool socketTypeMatch = false;
+
+            var coolerSockets = this.Cooler.CoolerSocketTypes.Select(cst => cst.SocketType);
+            foreach (var socket in coolerSockets)
+            {
+                if (socket.Name == this.Motherboard.SocketType.Name)
+                {
+                    socketTypeMatch = true;
+                    break;
+                }
+            }
+
+            if (!socketTypeMatch)
+                errorStrings.Add($"Cooler is not designed for {this.Motherboard.SocketType.Name} socket, so it will not fit.");
+
+            return errorStrings;
+        }
+
+        public List<string> CheckMotherboardAndStorageCompatibility()
+        {
+            var errorStrings = new List<string>();
+            int noOfMoboM2Slots = 0;
+
+            foreach (var storage in this.PCStorages.Select(pcs => pcs.Storage))
+            {
+                if (storage.StorageType.Name == "M.2 SSD")
+                    ++noOfMoboM2Slots;
+            }
+
+            if (noOfMoboM2Slots > this.Motherboard.NoOfM2Slots)
+                errorStrings.Add($"Motherboard has {this.Motherboard.NoOfM2Slots} M.2 Slots, but this PC build includes {noOfMoboM2Slots} M.2 SSDs");
+
+            return errorStrings;
+        }
+
+        public List<string> CheckPsuAndStoragesompatibility()
+        {
+            var errorStrings = new List<string>();
+            int noOfSataCablesRequired = 0;
+
+            foreach (var storage in this.PCStorages.Select(pcs => pcs.Storage))
+            {
+                if (storage.Name != "M.2 SSD")
+                    ++noOfSataCablesRequired;
+            }
+
+            if (this.PowerSupply.NoOfSATACables < noOfSataCablesRequired)
+                errorStrings.Add($"There are {noOfSataCablesRequired} SATA drives, but Power supply has only {this.PowerSupply.NoOfSATACables} SATA power cables");
+
+
+            return errorStrings;
+        }
+
+        public List<string> CheckGpuAndPowerSupplyCompatibility()
+        {
+            var errorStrings = new List<string>();
+            if (this.PowerSupply.NoOfPCIe6Pins < this.GPU.NoOfPCIe6Pins ||
+                this.PowerSupply.NoOfPCIe8Pins < this.GPU.NoOfPCIe8Pins ||
+                (this.PowerSupply.NoOfPCIe8Pins < 2 * this.GPU.NoOfPCIe12Pins && this.PowerSupply.NoOfPCIe12Pins < this.GPU.NoOfPCIe12Pins))
+            {
+                string tempErrorString = "GPU requires (";
+                if (this.GPU.NoOfPCIe6Pins > 0)
+                    tempErrorString += this.GPU.NoOfPCIe6Pins.ToString() + ") 6 Pin Connector";
+                if (this.GPU.NoOfPCIe6Pins > 1)
+                    tempErrorString += "s";
+
+                if (this.GPU.NoOfPCIe8Pins > 0)
+                    tempErrorString += ", (" + this.GPU.NoOfPCIe8Pins.ToString() + ") 8 Pin Connector";
+                if (this.GPU.NoOfPCIe8Pins > 1)
+                    tempErrorString += "s";
+
+                if (this.GPU.NoOfPCIe12Pins > 0)
+                    tempErrorString += " and (" + this.GPU.NoOfPCIe12Pins.ToString() + ") 12 Pin Connector";
+                if (this.GPU.NoOfPCIe12Pins > 1)
+                    tempErrorString += "s";
+
+                tempErrorString += ", but Power supply has ";
+                if (this.PowerSupply.NoOfPCIe6Pins > 0)
+                    tempErrorString += $"({this.PowerSupply.NoOfPCIe6Pins}) 6 Pin";
+                if (this.PowerSupply.NoOfPCIe8Pins > 0)
+                    tempErrorString += $", ({this.PowerSupply.NoOfPCIe8Pins}) 8 Pin";
+                if (this.PowerSupply.NoOfPCIe12Pins > 0)
+                    tempErrorString += $", ({this.PowerSupply.NoOfPCIe12Pins}) 12 Pin";
+
+                if (this.PowerSupply.NoOfPCIe6Pins == 0 && this.PowerSupply.NoOfPCIe8Pins == 0 && this.PowerSupply.NoOfPCIe12Pins == 0)
+                    tempErrorString += "no PCIe Pins";
+                else
+                    tempErrorString += " PCIe connectors";
+
+
+                errorStrings.Add(tempErrorString);
+            }
+
+            return errorStrings;
+        }
     }
 }
