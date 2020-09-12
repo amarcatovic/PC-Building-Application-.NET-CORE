@@ -21,11 +21,11 @@ namespace PC_Building_Application.Data.Models.Dtos.PC_Dtos
         public MotherboardReadDto Motherboard { get; set; }
         public CPUReadDto CPU { get; set; }
         public UserReadDto User { get; set; }
-        public GPUReadDto GPU { get; set; }
         public CoolerReadDto Cooler { get; set; }
         public PowerSupplyReadDto PowerSupply { get; set; }
         public CaseReadDto Case { get; set; }
-        public ICollection<RAMReadDto> RAMs { get; set; }
-        public ICollection<StorageReadDto> Storages { get; set; }
+        public ICollection<GPUReadDto> GPU { get; set; }
+        public ICollection<RAMReadDto> RAM { get; set; }
+        public ICollection<StorageReadDto> Storage { get; set; }
     }
 }
