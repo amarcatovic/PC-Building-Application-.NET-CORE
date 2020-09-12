@@ -168,7 +168,7 @@ namespace PC_Building_Application.Controllers
             if (!(await _repo.Done()))
                 return BadRequest("There was an error with saving new PC build to the database. Please review inputs and try again");
 
-            if(await _pCRamRepo.InsertRAMIntoPC(pc.Id, pCCreateDto.ramIds) && await _pCStorageRepo.InsertStorageInPC(pc.Id, pCCreateDto.ramIds))
+            if(await _pCRamRepo.InsertRAMIntoPC(pc.Id, pCCreateDto.ramIds) && await _pCStorageRepo.InsertStorageInPC(pc.Id, pCCreateDto.storageIds) && await _pcGpuRepo.InsertGPUntoPC(pc.Id, pCCreateDto.gpuIds))
             {
                 var pcReadDto = _mapper.Map<PCReadDto>(pc);
                 return CreatedAtRoute(nameof(GetPCById), new { id = pcReadDto.Id }, pcReadDto);
