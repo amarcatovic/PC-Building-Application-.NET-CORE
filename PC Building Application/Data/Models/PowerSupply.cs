@@ -23,25 +23,6 @@ namespace PC_Building_Application.Data.Models
         public int PhotoId { get; set; }
         public Manufacturer Manufacturer { get; set; }
         public int ManufacturerId { get; set; }
-        public ICollection<PC> PCs { get; set; }
-
-        // COMPATIBILITY CHECK METHODS
-        public List<string> CheckPsuAndStoragesompatibility(IEnumerable<Storage> storages)
-        {
-            var errorStrings = new List<string>();
-            int noOfSataCablesRequired = 0;
-            
-            foreach(var storage in storages)
-            {
-                if (storage.Name != "M.2 SSD")
-                    ++noOfSataCablesRequired;
-            }
-
-            if (this.NoOfSATACables < noOfSataCablesRequired)
-                errorStrings.Add($"There are {noOfSataCablesRequired} SATA drives, but Power supply has only {this.NoOfSATACables} SATA power cables");
-
-
-            return errorStrings;
-        }
+        public ICollection<PC> PCs { get; set; }       
     }
 }
