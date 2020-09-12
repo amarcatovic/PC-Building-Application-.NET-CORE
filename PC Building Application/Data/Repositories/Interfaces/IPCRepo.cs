@@ -13,7 +13,6 @@ namespace PC_Building_Application.Data.Repositories.Interfaces
         Task<bool> Done();
         Task ReplaceMotherboard(int pcId, int motherboardId);
         Task ReplaceCpu(int pcId, int cpuId);
-        Task ReplaceGpu(int pcId, int gpuId);
         Task ReplaceCooler(int pcId, int coolerId);
         Task ReplacePowerSupply(int pcId, int psuId);
         Task ReplaceCase(int pcId, int caseId);

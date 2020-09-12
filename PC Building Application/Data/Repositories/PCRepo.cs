@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PC_Building_Application.Data.Models;
+using PC_Building_Application.Data.Models.Join_Classes;
 using PC_Building_Application.Data.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -40,10 +41,12 @@ namespace PC_Building_Application.Data.Repositories
                 .ThenInclude(cpu => cpu.SocketType)
                 .Include(pc => pc.CPU)
                 .ThenInclude(cpu => cpu.Manufacturer)
-                .Include(pc => pc.GPU)
-                .ThenInclude(cpu => cpu.Photo)
-                .Include(pc => pc.GPU)
-                .ThenInclude(cpu => cpu.Manufacturer)
+                .Include(pc => pc.PCGPUs)
+                .ThenInclude(pc => pc.GPU)
+                .ThenInclude(gpu => gpu.Photo)
+                .Include(pc => pc.PCGPUs)
+                .ThenInclude(pc => pc.GPU)
+                .ThenInclude(gpu => gpu.Manufacturer)
                 .Include(pc => pc.Cooler)
                 .ThenInclude(c => c.Photo)
                 .Include(pc => pc.Cooler)
@@ -91,12 +94,6 @@ namespace PC_Building_Application.Data.Repositories
         {
             var pcFromDb = await _context.PCs.SingleOrDefaultAsync(pc => pc.Id == pcId);
             pcFromDb.CPUId = cpuId;
-        }
-
-        public async Task ReplaceGpu(int pcId, int gpuId)
-        {
-            var pcFromDb = await _context.PCs.SingleOrDefaultAsync(pc => pc.Id == pcId);
-            pcFromDb.GPUId = gpuId;
         }
 
         public async Task ReplaceMotherboard(int pcId, int motherboardId)
