@@ -13,10 +13,12 @@ namespace PC_Building_Application.Profiles
         public PCProfiles()
         {
             CreateMap<PC, PCReadDto>()
-                .ForMember(dest => dest.RAMs, opt => opt.MapFrom(src => src.PCRAMs
+                .ForMember(dest => dest.RAM, opt => opt.MapFrom(src => src.PCRAMs
                                                                     .Select(pcrams => pcrams.RAM)))
-                .ForMember(dest => dest.Storages, opt => opt.MapFrom(src => src.PCStorages
-                                                                    .Select(pcs => pcs.Storage)));
+                .ForMember(dest => dest.Storage, opt => opt.MapFrom(src => src.PCStorages
+                                                                    .Select(pcs => pcs.Storage)))
+                .ForMember(dest => dest.GPU, opt => opt.MapFrom(src => src.PCGPUs
+                                                                    .Select(pcgpu => pcgpu.GPU)));
             CreateMap<PCCreateDto, PC>();
             CreateMap<PCCreateWithPartsDto, PC>();
         }
