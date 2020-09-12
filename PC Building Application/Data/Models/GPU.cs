@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PC_Building_Application.Data.Models.Join_Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,6 +26,6 @@ namespace PC_Building_Application.Data.Models
         public int PhotoId { get; set; }
         public Manufacturer Manufacturer { get; set; }
         public int ManufacturerId { get; set; }
-        public ICollection<PC> PCs { get; set; }
+        public ICollection<PCGPU> PCGPUs { get; set; }
     }
 }
