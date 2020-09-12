@@ -32,6 +32,7 @@ namespace PC_Building_Application.Data
             modelBuilder.ApplyConfiguration(new StorageTypeConfiguration());
             modelBuilder.ApplyConfiguration(new StorageConfiguration());
             modelBuilder.ApplyConfiguration(new PCStorageConfiguration());
+            modelBuilder.ApplyConfiguration(new PCGPUConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
@@ -53,5 +54,6 @@ namespace PC_Building_Application.Data
         public DbSet<StorageType> StorageTypes { get; set; }
         public DbSet<Storage> Storages { get; set; }
         public DbSet<PCStorage> PCStorage { get; set; }
+        public DbSet<PCGPU> PCGPU { get; set; }
     }
 }
