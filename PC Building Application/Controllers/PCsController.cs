@@ -20,9 +20,6 @@ namespace PC_Building_Application.Controllers
         private readonly IPCRepo _repo;
         private readonly IPCRamRepo _pCRamRepo;
         private readonly IPCStorageRepo _pCStorageRepo;
-        private MotherboardCompatibilityCheck _motherboardCompatibilityCheck;
-        private GPUCompatibilityCheck _gPUCompatibilityCheck;
-        private PowerSupplyCompatibilityChecks _powerSupplyCompatibilityChecks;
 
         public PCsController(IMapper mapper, IPCRepo repo, IPCRamRepo pCRamRepo, IPCStorageRepo pCStorageRepo)
         {
@@ -30,9 +27,6 @@ namespace PC_Building_Application.Controllers
             _repo = repo;
             _pCRamRepo = pCRamRepo;
             _pCStorageRepo = pCStorageRepo;
-            _motherboardCompatibilityCheck = new MotherboardCompatibilityCheck();
-            _gPUCompatibilityCheck = new GPUCompatibilityCheck();
-            _powerSupplyCompatibilityChecks = new PowerSupplyCompatibilityChecks();
         }
 
         /// <summary>
@@ -81,28 +75,28 @@ namespace PC_Building_Application.Controllers
             //--------------------------------------------------------------------------------------------------------------------
             //                                       MOTHERBOARD CHECKS
             //--------------------------------------------------------------------------------------------------------------------
-            var moboCPUCheck = _motherboardCompatibilityCheck.CheckMotherboardAndCpuCompatibility(pcFromDb.Motherboard, pcFromDb.CPU);
+            var moboCPUCheck = pcFromDb.CheckMotherboardAndCpuCompatibility();
             if(moboCPUCheck.Count > 0)
             {
                 foreach (var error in moboCPUCheck)
                     validationErrors.Add(error);
             }
 
-            var moboRAMCheck = _motherboardCompatibilityCheck.CheckMotherboardAndRamsCompatibility(pcFromDb.Motherboard, rams);
+            var moboRAMCheck = pcFromDb.CheckMotherboardAndRamsCompatibility();
             if (moboRAMCheck.Count > 0)
             {
                 foreach (var error in moboRAMCheck)
                     validationErrors.Add(error);
             }
 
-            var moboCoolerCheck = _motherboardCompatibilityCheck.CheckMotherboardAndCoolerCompatibility(pcFromDb.Motherboard, pcFromDb.Cooler);
+            var moboCoolerCheck = pcFromDb.CheckMotherboardAndCoolerCompatibility();
             if (moboCoolerCheck.Count > 0)
             {
                 foreach (var error in moboCoolerCheck)
                     validationErrors.Add(error);
             }
 
-            var moboStorageCheck = _motherboardCompatibilityCheck.CheckMotherboardAndStorageCompatibility(pcFromDb.Motherboard, storages);
+            var moboStorageCheck = pcFromDb.CheckMotherboardAndStorageCompatibility();
             if (moboStorageCheck.Count > 0)
             {
                 foreach (var error in moboStorageCheck)
@@ -112,7 +106,7 @@ namespace PC_Building_Application.Controllers
             //--------------------------------------------------------------------------------------------------------------------
             //                                                       GPU CHECKS
             //--------------------------------------------------------------------------------------------------------------------
-            var gpuPowerSupplyCheck = _gPUCompatibilityCheck.CheckGpuAndPowerSupplyCompatibility(pcFromDb.GPU, pcFromDb.PowerSupply);
+            var gpuPowerSupplyCheck = pcFromDb.CheckGpuAndPowerSupplyCompatibility();
             if (gpuPowerSupplyCheck.Count > 0)
             {
                 foreach (var error in gpuPowerSupplyCheck)
@@ -122,7 +116,7 @@ namespace PC_Building_Application.Controllers
             //--------------------------------------------------------------------------------------------------------------------
             //                                                       PSU CHECKS
             //--------------------------------------------------------------------------------------------------------------------
-            var psuSataStorageCheck = _powerSupplyCompatibilityChecks.CheckPsuAndStoragesompatibility(pcFromDb.PowerSupply, storages);
+            var psuSataStorageCheck = pcFromDb.CheckPsuAndStoragesompatibility();
             if (psuSataStorageCheck.Count > 0)
             {
                 foreach (var error in psuSataStorageCheck)
