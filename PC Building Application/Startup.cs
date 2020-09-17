@@ -36,6 +36,7 @@ namespace PC_Building_Application
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddControllersWithViews();
 
             services.AddDbContext<DataContext>(options =>
@@ -116,6 +117,11 @@ namespace PC_Building_Application
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
+            app.UseCors(builder => builder
+                 .AllowAnyOrigin()
+                 .AllowAnyMethod()
+                 .AllowAnyHeader());
 
             app.UseSwagger();
             app.UseHttpsRedirection();
