@@ -80,6 +80,27 @@ namespace PC_Building_Application.Controllers
         }
 
         /// <summary>
+        /// Returns Yes/No if user with specific username does exist
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     GET /api/users/exists/{username}   
+        ///
+        /// </remarks>
+        /// <response code="200">Returns Yes if exists</response>
+        /// <response code="200">Returns No if doesn't exists</response>  
+        [AllowAnonymous]
+        [HttpGet("exists/{username}")]
+        public async Task<IActionResult> GetUserByUsername(string username)
+        {
+            if (await _repo.UserExsists(username))
+                return Ok("Yes");
+
+            return Ok("No");
+        }
+
+        /// <summary>
         /// User provides username, email and password for registration
         /// </summary>
         /// <remarks>
