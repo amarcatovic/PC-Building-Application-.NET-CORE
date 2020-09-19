@@ -80,6 +80,7 @@ namespace PC_Building_Application.Controllers
         ///         SocketTypeId:           1,
         ///         Clockspeed:             3.6 GHz
         ///         TurboSpeed:             4.2 GHz,
+        ///         NoOfCores:              6,
         ///         SingleThreadRating:     17234, BASED ON https://www.cpubenchmark.net/
         ///         ManufacturerId:         1,
         ///         Price:                  319.99,
