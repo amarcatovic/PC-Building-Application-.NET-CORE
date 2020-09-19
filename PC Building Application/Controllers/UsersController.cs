@@ -95,9 +95,9 @@ namespace PC_Building_Application.Controllers
         public async Task<IActionResult> GetUserByUsername(string username)
         {
             if (await _repo.UserExsists(username))
-                return Ok("Yes");
+                return Ok("\"Yes\"");
 
-            return Ok("No");
+            return Ok("\"No\"");
         }
 
         /// <summary>
