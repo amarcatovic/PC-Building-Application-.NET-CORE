@@ -18,7 +18,9 @@ namespace PC_Building_Application.Data.Repositories
         }
         public async Task<User> Login(string username, string password)
         {
-            var userFromDb = await _context.Users.SingleOrDefaultAsync(u => u.UserName == username);
+            var userFromDb = await _context.Users
+                .Include(u => u.Photo)
+                .SingleOrDefaultAsync(u => u.UserName == username);
 
             if (userFromDb == null)
                 return null;
@@ -77,7 +79,9 @@ namespace PC_Building_Application.Data.Repositories
 
         public async Task<User> GetUserById(string id)
         {
-            return await _context.Users.Include(u => u.Photo).SingleOrDefaultAsync(u => u.Id == id);
+            return await _context.Users
+                .Include(u => u.Photo)
+                .SingleOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<IEnumerable<User>> GetUsers()
