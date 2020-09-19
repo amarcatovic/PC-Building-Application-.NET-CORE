@@ -163,9 +163,12 @@ namespace PC_Building_Application.Controllers
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
+            var userReadDto = _mapper.Map<UserReadDto>(userFromDb);
+
             return Ok(new
             {
-                token = tokenHandler.WriteToken(token)
+                token = tokenHandler.WriteToken(token),
+                user = userReadDto
             });
         }
     }
