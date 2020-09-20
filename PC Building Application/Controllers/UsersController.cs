@@ -173,10 +173,12 @@ namespace PC_Building_Application.Controllers
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
+            var tokenExpirationDate = DateTime.Now.AddDays(1);
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(1),
+                Expires = tokenExpirationDate,
                 SigningCredentials = creds
             };
 
@@ -189,6 +191,7 @@ namespace PC_Building_Application.Controllers
             return Ok(new
             {
                 token = tokenHandler.WriteToken(token),
+                tokenExpirationDate = tokenExpirationDate,
                 user = userReadDto
             });
         }
