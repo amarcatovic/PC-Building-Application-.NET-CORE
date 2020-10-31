@@ -122,6 +122,7 @@ namespace PC_Building_Application.Helper
                         PublicId = "13"
                     }
                 );
+                context.SaveChanges();
             }
             else
             {
