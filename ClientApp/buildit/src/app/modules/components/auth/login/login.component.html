@@ -1,0 +1,66 @@
+<div class="vh-100 w-100 d-flex align-items-center gray">
+  <div class="container shadow">
+    <div class="row">
+      <div class="col-4 cover"></div>
+      <div class="col-8 pt-3 pb-3">
+        <h1>Welcome to BuildIT</h1>
+        <form [formGroup]="loginForm" (ngSubmit)="Submit($event)">
+          <mat-form-field class="form-group w-100">
+            <mat-label for="exampleInputEmail1">Username</mat-label>
+            <input
+              matInput
+              type="email"
+              class="form-control"
+              id="exampleInputEmail1"
+              placeholder="Username"
+              formControlName="username"
+            />
+
+            <mat-error
+              class="text-danger"
+              *ngIf="loginForm.get('username').errors?.required"
+              >Username is required</mat-error
+            >
+            <mat-error
+              class="text-danger"
+              *ngIf="loginForm.get('username').errors?.minlength"
+              >Username is must have at least 3 charachters</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field class="form-group w-100">
+            <mat-label for="exampleInputPassword1">Password</mat-label>
+            <input
+              matInput
+              type="password"
+              class="form-control"
+              id="exampleInputPassword1"
+              placeholder="Password"
+              formControlName="password"
+            />
+
+            <mat-error
+              class="text-danger"
+              *ngIf="loginForm.get('password').errors?.required"
+            >
+              Password is required
+            </mat-error>
+          </mat-form-field>
+
+          <div *ngIf="error" class="alert alert-danger mt-3 mb-3 w-25">
+            {{ error }}
+          </div>
+          <button mat-stroked-button class="primary w-100" color="primary">
+            Register
+          </button>
+          <mat-divider class="mt-4"></mat-divider>
+          <div
+            class="w-100 d-flex justify-content-center align-items-center flex-column"
+          >
+            <small class="text-blue mt-2">Do not have an account?</small>
+            <p class="primary-color">Sign up</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

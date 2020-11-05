@@ -3,20 +3,26 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { ReactiveFormsModule } from '@angular/forms';
+
 //interceptors
-import { JwtInterceptorInterceptor, ErrorInterceptor } from './_interceptors';
-import { from } from 'rxjs';
-import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './register/register.component';
+import {
+  JwtInterceptorInterceptor,
+  ErrorInterceptor,
+} from './modules/interceptors';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoreModule } from './core/core.module';
+import { ComponentsModule } from './modules/components/components.module';
+
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HomeComponent, RegisterComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    CoreModule,
+    ComponentsModule,
   ],
   providers: [
     {

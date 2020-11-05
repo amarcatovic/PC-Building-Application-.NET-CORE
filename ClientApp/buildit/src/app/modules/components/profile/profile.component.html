@@ -1,0 +1,86 @@
+<div class="mt-5 pt-5 d-flex justify-content-center">
+  <div class="row w-75">
+    <div class="col-4">
+      <div class="w-100 d-flex justify-content-center">
+        <img src="{{ currentUser.photoUrl }}" class="photo" />
+      </div>
+      <mat-divider class="w-100"></mat-divider>
+      <div class="mt-2">
+        <h3 class="userInfoText">Username: {{ currentUser.userName }}</h3>
+        <h3 class="userInfoText">Email: {{ currentUser.email }}</h3>
+      </div>
+    </div>
+    <div class="col-8 pt-5">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+          <mat-expansion-panel-header>
+            <mat-panel-title> Personal data </mat-panel-title>
+            <mat-panel-description>
+              Edit your personal data
+              <mat-icon class="pl-1">account_circle</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <mat-form-field>
+            <mat-label>First name</mat-label>
+            <input matInput />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Age</mat-label>
+            <input matInput type="number" min="1" />
+          </mat-form-field>
+          <mat-action-row>
+            <button mat-button color="primary" (click)="nextStep()">
+              Next
+            </button>
+          </mat-action-row>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel
+          [expanded]="step === 1"
+          (opened)="setStep(1)"
+          hideToggle
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title> Completed builds </mat-panel-title>
+            <mat-panel-description>
+              Edit your builds
+              <mat-icon class="pl-1">computer</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <mat-action-row>
+            <button mat-button color="warn" (click)="prevStep()">
+              Previous
+            </button>
+            <button mat-button color="primary" (click)="nextStep()">
+              Next
+            </button>
+          </mat-action-row>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel
+          [expanded]="step === 2"
+          (opened)="setStep(2)"
+          hideToggle
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title> Saved parts </mat-panel-title>
+            <mat-panel-description>
+              See you saved parts
+              <mat-icon class="pl-1">sim_card</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <mat-action-row>
+            <button mat-button color="warn" (click)="prevStep()">
+              Previous
+            </button>
+            <button mat-button color="primary" (click)="nextStep()">End</button>
+          </mat-action-row>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</div>

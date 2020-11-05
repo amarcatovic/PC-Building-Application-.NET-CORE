@@ -1,0 +1,17 @@
+<p class="nav w-100 pb-5">
+  <mat-toolbar color="primary" class="d-flex justify-content-between">
+    <div>
+      <img src="../../../../assets/img/buildit.svg" class="w-25 h-25 mr-3" />
+      <span>BuildIT</span>
+    </div>
+
+    <div *ngIf="User(); else loginTemplate" class="d-flex align-items-center">
+      <p class="pl-2 pr-2">System builder</p>
+      <img src="{{ User().photoUrl }}" class="profile_pic" />
+      <p class="d-flex align-items-center mr-2">{{ User().userName }}</p>
+      <p (click)="Logout()">Log out</p>
+    </div>
+
+    <ng-template #loginTemplate> Login </ng-template>
+  </mat-toolbar>
+</p>
