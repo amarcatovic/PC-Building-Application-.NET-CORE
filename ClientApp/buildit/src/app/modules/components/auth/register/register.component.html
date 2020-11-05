@@ -1,0 +1,120 @@
+<div class="vh-100 w-100 d-flex align-items-center gray">
+  <div class="container shadow">
+    <div class="row">
+      <div class="col-4 cover"></div>
+      <div class="col-8 pt-3 pb-3">
+        <h1>Welcome to BuildIT</h1>
+        <form [formGroup]="registrationForm" (ngSubmit)="Submit($event)">
+          <mat-form-field class="form-group w-100">
+            <mat-label for="exampleInputEmail1">Username</mat-label>
+            <input
+              matInput
+              type="text"
+              id="exampleInputEmail1"
+              placeholder="Username"
+              formControlName="username"
+              [class.is-invalid]="
+                registrationForm.get('username').touched &&
+                registrationForm.get('username').invalid
+              "
+            />
+
+            <mat-error
+              class="text-danger"
+              *ngIf="registrationForm.get('username').errors?.required"
+              >Username is required</mat-error
+            >
+            <mat-error
+              class="text-danger"
+              *ngIf="registrationForm.get('username').errors?.userExist"
+              >Username alredy exists</mat-error
+            >
+            <mat-error
+              class="text-danger"
+              *ngIf="registrationForm.get('username').errors?.minlength"
+              >Username must have at least 3 charachters</mat-error
+            >
+            <mat-error
+              class="text-danger"
+              *ngIf="registrationForm.get('username').errors?.usernameExists"
+            >
+              The username is taken</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field class="form-group w-100">
+            <mat-label for="exampleInputEmail1">Email</mat-label>
+            <input
+              matInput
+              type="email"
+              id="exampleInputEmail1"
+              placeholder="Email"
+              formControlName="email"
+            />
+
+            <mat-error
+              class="text-danger"
+              *ngIf="registrationForm.get('email').errors?.required"
+              >Email is required</mat-error
+            >
+            <mat-error
+              class="text-danger"
+              *ngIf="registrationForm.get('email').errors?.minlength"
+              >Email is must have at least 3 charachters</mat-error
+            >
+            <mat-error
+              class="text-danger"
+              *ngIf="registrationForm.get('email').errors?.email"
+              >Please enter valid email address</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field class="form-group w-100">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              formControlName="password"
+              type="password"
+              placeholder="Password"
+            />
+          </mat-form-field>
+          <mat-form-field class="form-group w-100">
+            <mat-label>Confirm password</mat-label>
+            <input
+              matInput
+              formControlName="confirmPassword"
+              type="password"
+              placeholder="Password"
+              class="form-control"
+              [errorStateMatcher]="matcher"
+            />
+            <mat-error *ngIf="registrationForm.hasError('misMatch')"
+              >Passwords did not match</mat-error
+            >
+
+            <!-- <mat-error
+              *ngIf="registrationForm.get('password').errors?.minlength"
+              >Passwords must have at least 8 charachters</mat-error
+            >
+            <mat-error
+              *ngIf="registrationForm.get('confirmPassword').errors?.required"
+              >Please confirm password</mat-error
+            > -->
+          </mat-form-field>
+
+          <div *ngIf="error" class="alert alert-danger mt-3 mb-3 w-25">
+            {{ error }}
+          </div>
+          <button mat-stroked-button class="primary w-100" color="primary">
+            Register
+          </button>
+          <mat-divider class="mt-4"></mat-divider>
+          <div
+            class="w-100 d-flex justify-content-center align-items-center flex-column"
+          >
+            <small class="text-blue mt-2">Already have an account?</small>
+            <p class="primary-color">Sign in</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
