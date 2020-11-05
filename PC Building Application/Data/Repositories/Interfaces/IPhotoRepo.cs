@@ -10,7 +10,7 @@ namespace PC_Building_Application.Data.Repositories.Interfaces
     public interface IPhotoRepo
     {
         Task AddPhoto(Photo photo);
-        Task<Photo> GetPhoto(int id);
+        Task<PhotoReturnDto> GetPhoto(int id);
         Task<Photo> AddPhotoForComponent(PhotoToCreateDto photo);
         Task<int> Done();
     }

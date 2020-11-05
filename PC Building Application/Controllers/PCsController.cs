@@ -29,7 +29,7 @@ namespace PC_Building_Application.Controllers
             _pCStorageRepo = pCStorageRepo;
             _pcGpuRepo = pCGPURepo;
         }
-
+        
         /// <summary>
         /// Returns single pc build which id matches requested id
         /// </summary>
@@ -50,6 +50,25 @@ namespace PC_Building_Application.Controllers
 
             var pcReadDto = _mapper.Map<PCReadDto>(pcFromDb);
             return Ok(pcReadDto);
+        }
+
+        /// <summary>
+        /// Endpoint that gets user builds
+        /// </summary>
+        /// <param name="id">user id</param>
+        /// <returns>user builds</returns>
+        [HttpGet("build/user/{id}")]
+        public async Task<IActionResult> GetUserPcBuilds(string id)
+        {
+            try
+            {
+                var result = await _repo.GetSingleUserBuilds(id);
+                return Ok(result);
+            }
+            catch
+            {
+                return BadRequest("There was an error fetching user builds");
+            }
         }
 
         /// <summary>

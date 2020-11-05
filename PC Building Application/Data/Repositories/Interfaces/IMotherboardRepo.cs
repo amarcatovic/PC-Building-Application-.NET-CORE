@@ -9,9 +9,9 @@ namespace PC_Building_Application.Data.Repositories.Interfaces
 {
     public interface IMotherboardRepo
     {
-        Task<IEnumerable<Motherboard>> GetAllMotherboards();
-        Task<Motherboard> GetMotherboardById(int id);
-        Task CreateMotherboard(Motherboard mobo, PhotoToCreateDto photo);
+        Task<IEnumerable<MotherboardReadDto>> GetAllMotherboards();
+        Task<MotherboardReadDto> GetMotherboardById(int id);
+        Task<MotherboardReadDto> CreateMotherboard(MotherboardCreateDto motherboardCreateDto);
         Task<int> Done();
     }
 }

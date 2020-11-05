@@ -19,12 +19,18 @@ namespace PC_Building_Application.Data.Repositories
         private readonly IOptions<CloudinarySettings> _cloudinarySettings;
         private readonly IMapper _mapper;
         private Cloudinary _cloudinary;
+        private readonly IUserRepo _userRepo;
 
-        public PhotoRepo(DataContext context, IMapper mapper, IOptions<CloudinarySettings> cloudinarySettings)
+        public PhotoRepo(
+            DataContext context, 
+            IMapper mapper, 
+            IOptions<CloudinarySettings> cloudinarySettings,
+            IUserRepo userRepo)
         {
             _context = context;
             _cloudinarySettings = cloudinarySettings;
             _mapper = mapper;
+            _userRepo = userRepo;
 
             Account account = new Account(
                 _cloudinarySettings.Value.CloudName,
@@ -76,9 +82,10 @@ namespace PC_Building_Application.Data.Repositories
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<Photo> GetPhoto(int id)
+        public async Task<PhotoReturnDto> GetPhoto(int id)
         {
-            return await _context.Photos.FindAsync(id);
+            var photo = await _context.Photos.FindAsync(id);
+            return _mapper.Map<PhotoReturnDto>(photo);
         }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PC_Building_Application.Data.Models.Dtos.PC_Dtos;
 
 namespace PC_Building_Application.Data.Repositories.Interfaces
 {
@@ -10,6 +11,7 @@ namespace PC_Building_Application.Data.Repositories.Interfaces
     {
         Task CreatePC(PC pc);
         Task<PC> GetPCById(int id);
+        Task<IEnumerable<PCReadDto>> GetSingleUserBuilds(string id);
         Task<bool> Done();
         Task ReplaceMotherboard(int pcId, int motherboardId);
         Task ReplaceCpu(int pcId, int cpuId);

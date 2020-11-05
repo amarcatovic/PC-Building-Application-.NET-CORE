@@ -6,19 +6,77 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using PC_Building_Application.Data.Models.Dtos.PC_Dtos;
 
 namespace PC_Building_Application.Data.Repositories
 {
     public class PCRepo : IPCRepo
     {
         private readonly DataContext _context;
-        public PCRepo(DataContext context)
+        private readonly IMapper _mapper;
+
+        public PCRepo(DataContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
         public async Task CreatePC(PC pc)
         {
             await _context.PCs.AddAsync(pc);
+        }
+
+        public async Task<IEnumerable<PCReadDto>> GetSingleUserBuilds(string id)
+        {
+            var userPcs = await _context.PCs
+                    .Include(pc => pc.Motherboard)
+                    .ThenInclude(m => m.Photo)
+                    .Include(pc => pc.Motherboard)
+                    .ThenInclude(m => m.SocketType)
+                    .Include(pc => pc.Motherboard)
+                    .ThenInclude(m => m.Manufacturer)
+                    .Include(pc => pc.CPU)
+                    .ThenInclude(cpu => cpu.Photo)
+                    .Include(pc => pc.CPU)
+                    .ThenInclude(cpu => cpu.SocketType)
+                    .Include(pc => pc.CPU)
+                    .ThenInclude(cpu => cpu.Manufacturer)
+                    .Include(pc => pc.PCGPUs)
+                    .ThenInclude(pc => pc.GPU)
+                    .ThenInclude(gpu => gpu.Photo)
+                    .Include(pc => pc.PCGPUs)
+                    .ThenInclude(pc => pc.GPU)
+                    .ThenInclude(gpu => gpu.Manufacturer)
+                    .Include(pc => pc.Cooler)
+                    .ThenInclude(c => c.Photo)
+                    .Include(pc => pc.Cooler)
+                    .ThenInclude(c => c.Manufacturer)
+                    .Include(pc => pc.Cooler)
+                    .ThenInclude(c => c.CoolerSocketTypes)
+                    .ThenInclude(cst => cst.SocketType)
+                    .Include(pc => pc.PowerSupply)
+                    .ThenInclude(ps => ps.Manufacturer)
+                    .Include(pc => pc.PowerSupply)
+                    .ThenInclude(ps => ps.Photo)
+                    .Include(pc => pc.Case)
+                    .ThenInclude(c => c.Photo)
+                    .Include(pc => pc.Case)
+                    .ThenInclude(c => c.Manufacturer)
+                    .Include(pc => pc.PCRAMs)
+                    .ThenInclude(pcram => pcram.RAM)
+                    .ThenInclude(ram => ram.Photo)
+                    .Include(pc => pc.PCStorages)
+                    .ThenInclude(pcs => pcs.Storage)
+                    .ThenInclude(s => s.Photo)
+                    .Include(pc => pc.PCStorages)
+                    .ThenInclude(pcs => pcs.Storage)
+                    .ThenInclude(s => s.StorageType)
+                    .Include(pc => pc.User)
+                    .ThenInclude(u => u.Photo)
+                    .Where(pc => pc.UserId == id)
+                    .ToListAsync();
+
+            return _mapper.Map<IEnumerable<PCReadDto>>(userPcs);
         }
 
         public async Task<bool> Done()

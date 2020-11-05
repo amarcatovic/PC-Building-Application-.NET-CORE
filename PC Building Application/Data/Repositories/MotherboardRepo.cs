@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace PC_Building_Application.Data.Repositories
 {
@@ -13,38 +14,54 @@ namespace PC_Building_Application.Data.Repositories
     {
         private readonly DataContext _context;
         private readonly IPhotoRepo _photoRepo;
+        private readonly IMapper _mapper;
 
-        public MotherboardRepo(DataContext context, IPhotoRepo photoRepo)
+        public MotherboardRepo(DataContext context, IPhotoRepo photoRepo, IMapper mapper)
         {
             _context = context;
             _photoRepo = photoRepo;
+            _mapper = mapper;
         }
-        public async Task CreateMotherboard(Motherboard mobo, PhotoToCreateDto photo)
+        public async Task<MotherboardReadDto> CreateMotherboard(MotherboardCreateDto motherboardCreateDto)
         {
-            var createdPhoto = await _photoRepo.AddPhotoForComponent(photo);
+            var photoToCreate = new PhotoToCreateDto()
+            {
+                Description = motherboardCreateDto.PhotoDescription,
+                File = motherboardCreateDto.PhotoFile
+            };
+            
+            var motherboard = _mapper.Map<Motherboard>(motherboardCreateDto);
+            
+            var createdPhoto = await _photoRepo.AddPhotoForComponent(photoToCreate);
             if (createdPhoto == null)
-                return;
+                return null;
 
-            mobo.PhotoId = createdPhoto.Id;
-            await _context.Motherboards.AddAsync(mobo);
+            motherboard.PhotoId = createdPhoto.Id;
+            await _context.Motherboards.AddAsync(motherboard);
+
+            return _mapper.Map<MotherboardReadDto>(motherboard);
         }
 
-        public async Task<IEnumerable<Motherboard>> GetAllMotherboards()
+        public async Task<IEnumerable<MotherboardReadDto>> GetAllMotherboards()
         {
-            return await _context.Motherboards
+            var motherboards = await _context.Motherboards
                 .Include(m => m.Photo)
                 .Include(m => m.Manufacturer)
                 .Include(m => m.SocketType)
                 .ToListAsync();
+
+            return _mapper.Map<IEnumerable<MotherboardReadDto>>(motherboards);
         }
 
-        public async Task<Motherboard> GetMotherboardById(int id)
+        public async Task<MotherboardReadDto> GetMotherboardById(int id)
         {
-            return await _context.Motherboards
+            var motherboard = await _context.Motherboards
                 .Include(m => m.Photo)
                 .Include(m => m.Manufacturer)
                 .Include(m => m.SocketType)
                 .SingleOrDefaultAsync(m => m.Id == id);
+
+            return _mapper.Map<MotherboardReadDto>(motherboard);
         }
 
         public async Task<int> Done()
